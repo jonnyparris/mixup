@@ -11,10 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141109173158) do
+ActiveRecord::Schema.define(version: 20141109175206) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "circles", force: true do |t|
+    t.string   "name"
+    t.datetime "signup_deadline"
+    t.datetime "submit_deadline"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "stems", force: true do |t|
     t.string   "track_name"
