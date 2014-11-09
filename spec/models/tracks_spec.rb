@@ -1,10 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe Stems, :type => :model do
+RSpec.describe Tracks, :type => :model do
   describe "attributes" do
     it { should respond_to(:track_name) }
     it { should respond_to(:download_url) }
-    xit { should respond_to(:producer) }
+    xit { should respond_to(:remix_id) }
+    xit { should respond_to(:producer_id) }
   end
 
   describe "associations" do
