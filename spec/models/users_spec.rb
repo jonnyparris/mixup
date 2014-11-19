@@ -13,9 +13,8 @@ RSpec.describe Users, :type => :model do
   end
 
   describe "associations" do
-  xit { should have_many(:stems) }
-  xit { should have_many(:remixes).with_foreign_key('remixer_id') }
-  xit { should have_many(:circles) }
-  xit { should have_many(:circles).through(:remixes) }
+    it { should have_many(:tracks) }
+    it { should have_many(:circles) }
+    it { should have_many(:submissions) }
   end
 end
