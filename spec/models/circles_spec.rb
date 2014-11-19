@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe Circles, :type => :model do
+RSpec.describe Circle, :type => :model do
   describe "attributes" do
     it { should respond_to(:name) }
     it { should respond_to(:signup_deadline) }
     it { should respond_to(:submit_deadline) }
 
-    xit { should respond_to(:creator_id) }
+    it { should respond_to(:creator_id) }
   end
 
   xdescribe "associations" do

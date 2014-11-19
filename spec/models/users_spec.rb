@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Users, :type => :model do
+RSpec.describe User, :type => :model do
   describe "attribute" do
     it { should respond_to(:first_name) }
     it { should respond_to(:last_name) }
@@ -15,6 +15,5 @@ RSpec.describe Users, :type => :model do
   describe "associations" do
     it { should have_many(:tracks) }
     it { should have_many(:circles) }
-    it { should have_many(:submissions) }
   end
 end
