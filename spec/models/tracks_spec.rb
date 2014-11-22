@@ -5,11 +5,10 @@ RSpec.describe Track, :type => :model do
     it { should respond_to(:track_name) }
     it { should respond_to(:download_url) }
     it { should respond_to(:creator_id) }
-    xit { should respond_to(:producer_id) }
   end
 
   describe "associations" do
-    xit { should belong_to(:producer) }
+    it { should belong_to(:creator).class_name('User') }
     xit { should have_many(:remixes) }
     xit { should have_many(:circles).through(:remixes) }
   end
