@@ -9,7 +9,7 @@ RSpec.describe Track, :type => :model do
 
   describe "associations" do
     it { should belong_to(:creator).class_name('User') }
-    xit { should have_many(:remixes) }
+    it { should have_many(:submissions) }
     xit { should have_many(:circles).through(:remixes) }
   end
 end
