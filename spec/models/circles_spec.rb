@@ -9,8 +9,8 @@ RSpec.describe Circle, :type => :model do
     it { should respond_to(:creator_id) }
   end
 
-  xdescribe "associations" do
-    it { should belong_to(:producer).with_foreign_key('creator_id') }
-    it { should have_many(:remix) }
+  describe "associations" do
+    it { should belong_to(:creator).class_name("User") }
+    it { should have_many(:submissions) }
   end
 end
