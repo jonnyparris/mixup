@@ -35,6 +35,8 @@ group :development, :test do
   gem 'capybara'
   gem 'rspec-rails', '~> 3.0.0'
   gem 'shoulda-matchers'
+  gem 'date_validator'
+  gem 'rspec-collection_matchers'
 end
 
 # Use ActiveModel has_secure_password
