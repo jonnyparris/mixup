@@ -16,6 +16,8 @@ RSpec.describe Circle, :type => :model do
 
   describe "validations" do
     it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:signup_deadline) }
+    it { should validate_presence_of(:submit_deadline) }
     it { should validate_uniqueness_of(:name).scoped_to(:creator_id) }
 
     it "is invalid if signup_deadline is after submit_deadline" do
