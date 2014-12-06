@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   root 'static_pages#index'
 
   get 'users/:id/dashboard' => 'users#dashboard'
+  get 'circles/index' => 'circles#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
