@@ -13,5 +13,5 @@ end
        Circle.create(name: Faker::Commerce.color,
               signup_deadline: Faker::Time.forward(23, :midnight),
               submit_deadline: Faker::Time.forward(48, :midnight),
-              creator_id: rand(User.count+1))
+              creator_id: Random.new.rand(1..User.count+1))
 end
