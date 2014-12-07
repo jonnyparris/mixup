@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'static_pages#index'
 
-  get 'users/:id/dashboard' => 'users#dashboard'
+  get 'users/:id/dashboard' => 'users#dashboard', as: :user_dashboard
   get 'circles/index' => 'circles#index'
 
   # Example of regular route:
