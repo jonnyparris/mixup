@@ -37,10 +37,13 @@
 
       <% if @remaining_circles %>
         <li>
-          <% if @remaining_circles > 0 %>
-            <%= link_to("More Circles ...(#{@remaining_circles})", user_dashboard_path(1, :circle_offset => 5)) %>
+          <% if @circle_offset == 0 && @remaining_circles > 0 %>
+            <%= link_to("More Circles ...(#{@remaining_circles})", user_dashboard_path(1, :circle_offset => @circle_offset+5)) %>
+          <% elsif @remaining_circles > 0 %>
+            <%= link_to("Prev 5...", user_dashboard_path(1, :circle_offset => @circle_offset-5)) %>
+            <%= link_to("More Circles ...(#{@remaining_circles})", user_dashboard_path(1, :circle_offset => @circle_offset+5)) %>
           <% else %>
-            <%= link_to("Prev 5...", :back) %>
+            <%= link_to("Prev 5...", user_dashboard_path(1, :circle_offset => @circle_offset-5)) %>
           <% end %>
         </li>
       <% end %>
