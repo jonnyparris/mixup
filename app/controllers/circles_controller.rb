@@ -1,7 +1,7 @@
 class CirclesController<ApplicationController
 
   def index
-    @circles = Circle.all
+    @circles = Circle.includes(:creator)
     render "_index"
   end
 
