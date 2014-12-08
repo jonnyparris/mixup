@@ -1,10 +1,10 @@
 describe "User Dashboard" do
   it "includes list of all circles by default, but declares if there are no circles" do
-    visit 'users/1/dashboard'
+    visit user_dashboard_path(1)
     expect(page).to have_content("No Circles")
   end
 
-  it "includes a link to previous circles as you're paging through chunks of 5 circles" do
+  it "includes a link to previous circles only when there are previous circles to return to" do
     User.delete_all
     j_dilla = User.create(first_name: Faker::Name.first_name,
                   last_name: Faker::Name.last_name,
