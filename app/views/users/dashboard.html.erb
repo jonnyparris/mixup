@@ -1,59 +1,8 @@
-<div class="off-canvas-wrap" data-offcanvas>
-  <main class="inner-wrap">
+<% if flash[:success] %>
+  <div data-alert class="alert-box success radius">
+    <%= flash[:success] %>
+    <a href="#" class="close">&times;</a>
+  </div>
+<% end %>
 
-    <nav class="top-bar" data-topbar role="navigation">
-      <ul class="title-area">
-        <li class="name">
-          <h1><a href="#">Mixup</a></h1>
-        </li>
-      </ul>
-
-      <section class="top-bar-section">
-        <ul class="right">
-          <li><a href="#">Messages</a></li>
-          <li><a href="#">Logout</a></li>
-        </ul>
-
-        <ul class="left">
-          <li><a href="#" class="left-off-canvas-toggle menu-icon">Menu</a></li>
-          <li><a href="#">Dashboard</a></li>
-        </ul>
-      </section>
-    </nav>
-
-    <aside id="user-menu" class="left-off-canvas-menu">
-      <ul class="off-canvas-list">
-        <li><label>User Menu</label></li>
-        <li><a href="#">Account</a></li>
-        <li><a href="#">Create Circle</a></li>
-        <li><a href="#">Upload Stems</a></li>
-        <li><a href="#">Upload Remix</a></li>
-      </ul>
-    </aside>
-
-    <div class="current-container">
-      <h2>Circles index partial</h2>
-      <h2>Stems index partial</h2>
-    </div>
-
-    <a class="exit-off-canvas"></a>
-
-  </main>
-</div>
-<!--
-<ul class="side-nav">
-<li><h1>Dashboard</h1></li>
-<h3>[Username]</h3>
-    <li>Start New Mixup</li>
-    <li>Submit Remix</li>
-    <li>Download </li>
-  <h3>Browse Mixups</h3>
-    <li>Join Now</li>
-    <li>In Progress</li>
-    <li>Finished</li>
-  </ul>
-  <h3>Browse Remixes</h3>
-  <h3>Browse Profiles</h3>
-</ul>es</h3>
-  <h3>Browse Profiles</h3>
-</li> -->
+<%= render :partial => "circles/index" %>

@@ -39,6 +39,7 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'date_validator'
   gem 'rspec-collection_matchers'
+  gem 'faker'
 end
 
 # Use ActiveModel has_secure_password
