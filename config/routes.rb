@@ -1,16 +1,14 @@
 Rails.application.routes.draw do
   get 'static_pages/index', as: :welcome
 
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
-
-  # You can have the root of your site routed with "root"
   root 'static_pages#index'
 
   get 'users/:id/dashboard' => 'users#dashboard', as: :user_dashboard
   get 'circles/index' => 'circles#index'
 
-  resources :users
+  resources :users do
+    resources :tracks, as: :stems
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
