@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get 'users/:id/dashboard' => 'users#dashboard', as: :user_dashboard
   get 'circles/index' => 'circles#index'
 
+  resources :users
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
