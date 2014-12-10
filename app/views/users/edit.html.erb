@@ -1,0 +1,6 @@
+<h3>Edit Profile</h3>
+<%= render :partial => "form" %>
+<h3>Delete Profile?</h3>
+<%= form_for @user, :html => { :method => :delete } do |f| %>
+  <%= f.submit "Delete me forever!", :disable_with => 'Nooo....avenge meee....' %>
+<% end %>
