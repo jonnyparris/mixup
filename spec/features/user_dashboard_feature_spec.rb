@@ -1,12 +1,7 @@
 describe "User Dashboard" do
-  it "includes list of all circles by default, but declares if there are no circles" do
-    visit user_dashboard_path(1)
-    expect(page).to have_content("No Circles")
-  end
-
-  it "includes a link to previous circles only when there are previous circles to return to" do
+  before :all do
     User.delete_all
-    j_dilla = User.create(first_name: Faker::Name.first_name,
+    @j_dilla = User.create(first_name: Faker::Name.first_name,
                   last_name: Faker::Name.last_name,
                   user_name: Faker::Internet.user_name,
                   email: Faker::Internet.email,
@@ -14,14 +9,22 @@ describe "User Dashboard" do
                   location: Faker::Address.city,
                   password_digest: "pop"
                   )
+  end
+
+  it "includes list of all circles by default, but declares if there are no circles" do
+    visit user_dashboard_path(@j_dilla.id)
+    expect(page).to have_content("No Circles")
+  end
+
+  it "includes a link to previous circles only when there are previous circles to return to" do
     Circle.delete_all
     20.times do
            Circle.create(name: Faker::Commerce.color,
                   signup_deadline: Faker::Time.forward(23, :midnight),
                   submit_deadline: Faker::Time.forward(48, :midnight),
-                  creator_id: j_dilla.id)
+                  creator_id: @j_dilla.id)
     end
-    visit user_dashboard_path(1)
+    visit user_dashboard_path(@j_dilla.id)
     expect(page).to_not have_content("Prev")
     click_link "More Circles"
     expect(page).to have_content("Prev")
