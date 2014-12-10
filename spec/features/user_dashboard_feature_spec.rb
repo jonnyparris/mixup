@@ -12,16 +12,17 @@ describe "User Dashboard" do
   end
 
   it "includes list of all circles by default, but declares if there are no circles" do
+    Circle.delete_all
     visit user_dashboard_path(@j_dilla.id)
     expect(page).to have_content("No Circles")
   end
 
   it "includes a link to previous circles only when there are previous circles to return to" do
     Circle.delete_all
-    20.times do
+    40.times do
            Circle.create(name: Faker::Commerce.color,
-                  signup_deadline: Faker::Time.forward(23, :midnight),
-                  submit_deadline: Faker::Time.forward(48, :midnight),
+                  signup_deadline: Faker::Time.forward(2, :midnight),
+                  submit_deadline: Faker::Time.forward(80, :midnight),
                   creator_id: @j_dilla.id)
     end
     visit user_dashboard_path(@j_dilla.id)
