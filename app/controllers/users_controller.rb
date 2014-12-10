@@ -28,7 +28,8 @@ class UsersController < ApplicationController
       flash[:success] = "Success! Welcome to your dashboard!"
       redirect_to user_dashboard_path(@user.id)
     else
-      flash[:error] = ["Sorry, something went wrong. Please try again", @user.errors.full_messages.to_sentence ]
+      flash[:error] = ["Sorry, something went wrong. Please try again",
+                      @user.errors.full_messages.to_sentence]
       render 'new'
     end
   end
@@ -60,7 +61,14 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :user_name, :email, :password_digest, :password_confirmation, :avatar, :location)
+      params.require(:user).permit( :first_name,
+                                    :last_name,
+                                    :user_name,
+                                    :email,
+                                    :password_digest,
+                                    :password_confirmation,
+                                    :avatar,
+                                    :location)
     end
 
 end
