@@ -1,4 +1,4 @@
-class CirclesController<ApplicationController
+class CirclesController < ApplicationController
 
   def index
     @circles = Circle.includes(:creator)
