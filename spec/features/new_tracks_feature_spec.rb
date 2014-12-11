@@ -13,6 +13,6 @@ feature "Add new tracks" do
     fill_in "Download url", with: "https://soundcloud.com/alt-j/sets/breezeblock-remix-stems"
     fill_in "Track name", with: "BreezeBlock 2012 (original mix"
     click_button("Submit")
-    expect(page).to have_content("Success!")
+    expect(page).to have_content("Sweet!")
   end
 end
