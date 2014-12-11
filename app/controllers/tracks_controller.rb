@@ -3,7 +3,7 @@ class TracksController < ApplicationController
   before_action :find_stem, except: [:index, :new, :create]
 
   def index
-    @tracks = Track.where(creator_id: params[:id])
+    @tracks = Track.where(creator_id: params[:user_id])
   end
 
   def show
@@ -14,6 +14,11 @@ class TracksController < ApplicationController
   end
 
   def edit
+    unless find_user
+      flash[:error] = ["Sorry, something went wrong. Please try again",
+                      "You didn't create this track so you can't edit its details!"]
+      redirect_to user_stems_path
+    end
   end
 
   def create
@@ -31,7 +36,7 @@ class TracksController < ApplicationController
   def update
     if @track.update_attributes(track_params)
       flash[:success] = "Sweet! Track was successfully updated"
-      redirect_to @track
+      redirect_to user_stems_path
     else
       flash[:error] = ["Sorry, something went wrong. Please try again",
                       @track.errors.full_messages.to_sentence]
@@ -42,7 +47,7 @@ class TracksController < ApplicationController
   def destroy
     if @track.destroy
       flash[:success] = "Sweet! Track was successfully deleted"
-      redirect_to user_path(params[:id])
+      redirect_to user_stems_path(params[:id])
     else
       flash[:error] = ["Sorry, something went wrong. Please try again",
                       @track.errors.full_messages.to_sentence]
@@ -54,6 +59,11 @@ class TracksController < ApplicationController
 
     def find_stem
       @track = Track.find(params[:id])
+    end
+
+    def find_user
+      @user = User.find(params[:user_id])
+      @user.id == @track.creator_id
     end
 
     def track_params
