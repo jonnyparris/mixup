@@ -12,13 +12,19 @@
   </head>
 
   <body>
+    <% if params[:user_id] %>
+      <% @this_user = params[:user_id] %>
+    <% else %>
+      <% @this_user = params[:id] %>
+    <% end %>
+
     <div class="off-canvas-wrap" data-offcanvas>
       <main class="inner-wrap">
 
         <nav class="top-bar" data-topbar role="navigation">
           <ul class="title-area">
             <li class="name">
-              <h1><a href="#">Mixup</a></h1>
+              <h1><%= link_to("Mixup", root_path) %></h1>
             </li>
           </ul>
 
@@ -30,17 +36,12 @@
 
             <ul class="left">
               <li><a href="#" class="left-off-canvas-toggle menu-icon">Menu</a></li>
-              <li><a href="#">Dashboard</a></li>
+              <li><%= link_to("Dashboard", user_dashboard_path(id: @this_user)) %></li>
             </ul>
           </section>
         </nav>
 
         <aside id="user-menu" class="left-off-canvas-menu">
-          <% if params[:user_id] %>
-            <% @this_user = params[:user_id] %>
-          <% else %>
-            <% @this_user = params[:id] %>
-          <% end %>
           <ul class="off-canvas-list">
             <li><label>User Menu</label></li>
             <li><%= link_to("Account", edit_user_path(id: @this_user)) %></li>
