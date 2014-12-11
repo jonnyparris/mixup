@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title><%= content_for?(:title) ? yield(:title) : "foundation-rails" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : "Dashboard - Mixup" %></title>
 
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
@@ -12,13 +12,19 @@
   </head>
 
   <body>
+    <% if params[:user_id] %>
+      <% @this_user = params[:user_id] %>
+    <% else %>
+      <% @this_user = params[:id] %>
+    <% end %>
+
     <div class="off-canvas-wrap" data-offcanvas>
       <main class="inner-wrap">
 
         <nav class="top-bar" data-topbar role="navigation">
           <ul class="title-area">
             <li class="name">
-              <h1><a href="#">Mixup</a></h1>
+              <h1><%= link_to("Mixup", root_path) %></h1>
             </li>
           </ul>
 
@@ -30,7 +36,7 @@
 
             <ul class="left">
               <li><a href="#" class="left-off-canvas-toggle menu-icon">Menu</a></li>
-              <li><a href="#">Dashboard</a></li>
+              <li><%= link_to("Dashboard", user_dashboard_path(id: @this_user)) %></li>
             </ul>
           </section>
         </nav>
@@ -38,14 +44,27 @@
         <aside id="user-menu" class="left-off-canvas-menu">
           <ul class="off-canvas-list">
             <li><label>User Menu</label></li>
-            <li><a href="#">Account</a></li>
+            <li><%= link_to("Account", edit_user_path(id: @this_user)) %></li>
             <li><a href="#">Create Circle</a></li>
-            <li><a href="#">Upload Stems</a></li>
+            <li><%= link_to("Add Stems", new_user_stem_path(user_id: @this_user)) %></li>
             <li><a href="#">Upload Remix</a></li>
           </ul>
         </aside>
 
         <div class="current-container">
+          <% if flash[:success] %>
+            <div data-alert class="alert-box success radius">
+              <%= flash[:success] %>
+              <a href="#" class="close">&times;</a>
+            </div>
+          <% end %>
+          <% if flash[:error] %>
+            <div data-alert class="alert-box alert radius">
+              <%= flash[:error][0] %>
+              <%= flash[:error][1]%>
+              <a href="#" class="close">&times;</a>
+            </div>
+          <% end %>
           <%= yield %>
         </div>
 

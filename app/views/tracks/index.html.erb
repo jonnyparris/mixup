@@ -1,0 +1,14 @@
+<% if @tracks.count == 0 %>
+  <h3>No tracks!</h3>
+  <%= link_to("Add stems now", new_user_stem_path(params[:user_id])) %>
+<% else %>
+  <h3>All Tracks</h3>
+  <ul>
+    <% @tracks.each do |track| %>
+      <li>
+        <%= link_to(track.track_name, edit_user_stem_path(id: track.id)) %>,
+        date added: <%= track.created_at %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

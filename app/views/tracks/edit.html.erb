@@ -1,0 +1,10 @@
+<%= form_for @track, url: user_stem_path, builder: LabellingFormBuilder do |f| %>
+  <%= f.hidden_field :creator_id, value: params[:user_id] %>
+  <%= f.text_field_with_label :track_name, required: true %>
+  <%= f.url_field_with_label :download_url, required: true %>
+  <%= f.submit %>
+<% end %>
+<h3>Delete Track?</h3>
+<%= form_for @track, url: user_stem_path, :user_id => params[:id], id: @track.id, :html => { :method => :delete } do |f| %>
+  <%= f.submit "Delete track forever!", :disable_with => 'RIP awesome beats...' %>
+<% end %>

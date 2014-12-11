@@ -17,6 +17,7 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    render layout: 'static_pages'
   end
 
   def edit
@@ -30,7 +31,7 @@ class UsersController < ApplicationController
     else
       flash[:error] = ["Sorry, something went wrong. Please try again",
                       @user.errors.full_messages.to_sentence]
-      render 'new'
+      render 'new', layout: 'static_pages'
     end
   end
 
