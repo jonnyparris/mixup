@@ -3,7 +3,7 @@ class TracksController < ApplicationController
   before_action :find_stem, except: [:index, :new, :create]
 
   def index
-    @tracks = Track.all
+    @tracks = Track.where(creator_id: params[:id])
   end
 
   def show
