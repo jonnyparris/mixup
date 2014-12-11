@@ -17,10 +17,10 @@ class TracksController < ApplicationController
   end
 
   def create
-    @track = Track.new(params[:stem])
+    @track = Track.new(track_params)
     if @track.save
-      flash[:success] = "Track successfully created"
-      redirect_to @track
+      flash[:success] = "Sweet! Track successfully created"
+      redirect_to user_stems_path(params[:user_id])
     else
       flash[:error] = ["Sorry, something went wrong. Please try again",
                       @track.errors.full_messages.to_sentence]
@@ -29,21 +29,23 @@ class TracksController < ApplicationController
   end
 
   def update
-    if @track.update_attributes(params[:stem])
-      flash[:success] = "Track was successfully updated"
+    if @track.update_attributes(track_params)
+      flash[:success] = "Sweet! Track was successfully updated"
       redirect_to @track
     else
-      flash[:error] = "Something went wrong"
+      flash[:error] = ["Sorry, something went wrong. Please try again",
+                      @track.errors.full_messages.to_sentence]
       render 'edit'
     end
   end
 
   def destroy
     if @track.destroy
-      flash[:success] = "Track was successfully deleted"
+      flash[:success] = "Sweet! Track was successfully deleted"
       redirect_to user_path(params[:id])
     else
-      flash[:error] = "Something went wrong"
+      flash[:error] = ["Sorry, something went wrong. Please try again",
+                      @track.errors.full_messages.to_sentence]
       redirect_to edit_user_tracks_path(params[:id])
     end
   end
@@ -54,4 +56,9 @@ class TracksController < ApplicationController
       @track = Track.find(params[:id])
     end
 
+    def track_params
+      params.require(:track).permit(:download_url,
+                                    :track_name,
+                                    :creator_id)
+    end
 end
