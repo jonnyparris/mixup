@@ -5,12 +5,12 @@
               email: Faker::Internet.email,
               avatar: Faker::Avatar.image,
               location: Faker::Address.city,
-              password_digest: "pop")
+              password: "pop")
 end
 
 10.times do
   Circle.create(name: Faker::Commerce.color,
                 signup_deadline: Faker::Time.forward(23, :midnight),
                 submit_deadline: Faker::Time.forward(48, :midnight),
-                creator_id: Random.new.rand(1..User.count+1))
+                creator_id: Random.new.rand(1..User.count + 1))
 end
