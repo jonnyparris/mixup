@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  get 'login' => 'sessions#new', as: :new_session
-
+  get 'login' => 'sessions#new', as: :login
+  post 'login' => 'sessions#create'
   get 'logout' => 'sessions#destroy', as: :logout
 
   get 'static_pages/index', as: :welcome
