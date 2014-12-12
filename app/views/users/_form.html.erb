@@ -6,7 +6,7 @@
   </div>
 <% end %>
 
-<%= form_for @user, builder: LabellingFormBuilder do |f| %>
+<%= form_for @current_user, builder: LabellingFormBuilder do |f| %>
 
   <%= f.text_field_with_label :first_name %>
   <%= f.text_field_with_label :last_name %>

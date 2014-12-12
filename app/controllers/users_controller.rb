@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :find_user, except: [:index, :new, :create]
+  before_action :current_user, except: [:index, :new, :create]
+  before_action :reject_unless_logged_in, except: [:new, :create]
 
   def dashboard
     @total_circles = Circle.count
@@ -16,7 +17,7 @@ class UsersController < ApplicationController
   end
 
   def new
-    @user = User.new
+    @current_user = User.new
     render layout: 'static_pages'
   end
 
@@ -24,42 +25,38 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
-    if @user.save
+    @current_user = User.new(user_params)
+    if @current_user.save
       flash[:success] = "Success! Welcome to your dashboard!"
-      redirect_to user_dashboard_path(@user.id)
+      redirect_to user_dashboard_path(@current_user.id)
     else
       flash[:error] = ["Sorry, something went wrong. Please try again",
-                      @user.errors.full_messages.to_sentence]
+                      @current_user.errors.full_messages.to_sentence]
       render 'new', layout: 'static_pages'
     end
   end
 
   def update
-    if @user.update_attributes(user_params)
+    if @current_user.update_attributes(user_params)
       flash[:success] = "User was successfully updated"
-      redirect_to @user
+      redirect_to @current_user
     else
       flash[:error] = "Something went wrong"
-      render @users_edit_path
+      render @current_users_edit_path
     end
   end
 
   def destroy
-    if @user.destroy
+    if @current_user.destroy
       flash[:success] = "User was successfully deleted"
       redirect_to welcome_path
     else
       flash[:error] = "Something went wrong"
-      redirect_to @users_path
+      redirect_to @current_users_path
     end
   end
 
   private
-
-    def find_user
-      @user = User.find(params[:id])
-    end
 
     def user_params
       params.require(:user).permit( :first_name,
@@ -72,4 +69,7 @@ class UsersController < ApplicationController
                                     :location)
     end
 
+    def reject_unless_logged_in
+      redirect_to root_url, notice: "You must be logged in to view that page." unless current_user
+    end
 end

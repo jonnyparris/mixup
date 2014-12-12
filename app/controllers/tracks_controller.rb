@@ -1,9 +1,10 @@
 class TracksController < ApplicationController
   layout "users"
+  before_action :current_user
   before_action :find_stem, except: [:index, :new, :create]
 
   def index
-    @tracks = Track.where(creator_id: params[:user_id])
+    @tracks = Track.where(creator_id: current_user.id)
   end
 
   def show
@@ -14,7 +15,7 @@ class TracksController < ApplicationController
   end
 
   def edit
-    unless find_user
+    unless user_is_creator?
       flash[:error] = ["Sorry, something went wrong. Please try again",
                       "You didn't create this track so you can't edit its details!"]
       redirect_to user_stems_path
@@ -61,9 +62,8 @@ class TracksController < ApplicationController
       @track = Track.find(params[:id])
     end
 
-    def find_user
-      @user = User.find(params[:user_id])
-      @user.id == @track.creator_id
+    def user_is_creator?
+      current_user.id == find_stem.creator_id
     end
 
     def track_params
