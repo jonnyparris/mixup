@@ -12,12 +12,6 @@
   </head>
 
   <body>
-    <% if params[:user_id] %>
-      <% @this_user = params[:user_id] %>
-    <% else %>
-      <% @this_user = params[:id] %>
-    <% end %>
-
     <div class="off-canvas-wrap" data-offcanvas>
       <main class="inner-wrap">
 
@@ -36,17 +30,21 @@
 
             <ul class="left">
               <li><a href="#" class="left-off-canvas-toggle menu-icon">Menu</a></li>
-              <li><%= link_to("Dashboard", user_dashboard_path(id: @this_user)) %></li>
+              <li><%= link_to("Dashboard", user_dashboard_path(id: @current_user.id)) %></li>
             </ul>
           </section>
         </nav>
 
         <aside id="user-menu" class="left-off-canvas-menu">
+          <% if @current_user.avatar %>
+            <img src=<%= "#{@current_user.avatar}" %> alt="your profile picture">
+          <% end %>
+
           <ul class="off-canvas-list">
             <li><label>User Menu</label></li>
-            <li><%= link_to("Account", edit_user_path(id: @this_user)) %></li>
+            <li><%= link_to("Account", edit_user_path(id: @current_user.id)) %></li>
             <li><a href="#">Create Circle</a></li>
-            <li><%= link_to("Add Stems", new_user_stem_path(user_id: @this_user)) %></li>
+            <li><%= link_to("Add Stems", new_user_stem_path(user_id: @current_user.id)) %></li>
             <li><a href="#">Upload Remix</a></li>
           </ul>
         </aside>
