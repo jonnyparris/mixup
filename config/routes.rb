@@ -8,12 +8,12 @@ Rails.application.routes.draw do
   root 'static_pages#index'
 
   get 'users/:id/dashboard' => 'users#dashboard', as: :user_dashboard
-  get 'circles/index' => 'circles#index'
 
   resources :users do
     resources :tracks, as: :stems
   end
 
+  resources :circles
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

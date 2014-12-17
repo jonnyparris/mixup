@@ -15,7 +15,7 @@ describe "Circles" do
            submit_deadline: Faker::Time.forward(300, :midnight),
            creator_id: j_dilla.id
     )
-    visit 'circles/index'
+    visit 'circles'
     expect(page).to have_content("Xmas remixes")
   end
 end
