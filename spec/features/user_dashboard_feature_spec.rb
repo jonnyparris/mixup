@@ -8,11 +8,11 @@ describe "User Dashboard" do
                            email: "a",
                            avatar: Faker::Avatar.image,
                            location: Faker::Address.city,
-                           password: "pop"
+                           password: "poppop"
                            )
     visit login_path
     fill_in "email", with: "a"
-    fill_in "password", with: "pop"
+    fill_in "password", with: "poppop"
     click_button("Login")
   end
 

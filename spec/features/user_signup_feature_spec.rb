@@ -10,7 +10,7 @@ feature "User Signup" do
     visit new_user_path
     fill_in "User name", with: "j_dilla"
     fill_in "Email", with: "j_dilla"
-    fill_in "Password digest", with: "j_dilla"
+    fill_in "Password", with: "j_dilla"
     fill_in "Password confirmation", with: "j_dilla"
     click_button("Create User")
     expect(page).to have_content("Welcome")

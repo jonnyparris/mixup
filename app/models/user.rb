@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   validates_presence_of :user_name
   validates_presence_of :email
 
+  validates_length_of :password, minimum: 6
   validates_length_of :user_name, maximum: 64
 
   validates_uniqueness_of :user_name, case_sensitive: false

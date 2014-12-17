@@ -7,7 +7,7 @@ describe "Circles" do
                   email: Faker::Internet.email,
                   avatar: Faker::Avatar.image,
                   location: Faker::Address.city,
-                  password_digest: "pop"
+                  password: "poppop"
                   )
     Circle.delete_all
     Circle.create(name: "Xmas remixes",
