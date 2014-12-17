@@ -12,6 +12,19 @@
   </head>
 
   <body>
+    <% if flash[:success] %>
+      <div data-alert class="alert-box success radius">
+        <%= flash[:success] %>
+        <a href="#" class="close">&times;</a>
+      </div>
+    <% end %>
+    <% if flash[:error] %>
+      <div data-alert class="alert-box alert radius">
+        <%= flash[:error][0] %>
+        <%= flash[:error][1]%>
+        <a href="#" class="close">&times;</a>
+      </div>
+    <% end %>
     <%= yield %>
     <%= javascript_include_tag "application" %>
   </body>
