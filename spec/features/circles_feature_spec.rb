@@ -60,4 +60,3 @@ feature "Create Circle" do
     expect(page).to have_content("Sweet!")
   end
 end
-
