@@ -16,4 +16,8 @@ class LabellingFormBuilder < ActionView::Helpers::FormBuilder
     label(attribute) + url_field(attribute, options={})
   end
 
+  def datetime_field_with_label(attribute, options={})
+    label(attribute) + datetime_field(attribute, options={})
+  end
+
 end
