@@ -27,9 +27,9 @@
             <% end %>
 
             <p>created by: <%= circle.creator.user_name %></p>
-            <img src="<%= circle.creator.avatar %>" alt="">
+            <img src="<%= circle.creator.avatar %>" alt=<%= "#{circle.creator.user_name} profile pic" %>>
             <p class="text-right">
-              <a href="#">view details</a>
+              <%= link_to("More details", circle_path(circle)) %>
             </p>
           </div>
         </li>
