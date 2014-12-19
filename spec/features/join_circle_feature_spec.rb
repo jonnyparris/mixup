@@ -1,4 +1,4 @@
-feature "Join Circle" do
+feature "View, then join Circle" do
   before :each do
     User.delete_all
     @j_dilla = User.create(first_name: Faker::Name.first_name,
@@ -30,5 +30,24 @@ feature "Join Circle" do
     click_link @new_beat.track_name
     expect(page).to_not have_content("Join")
     expect(page).to have_content("Undo")
+  end
+
+  scenario "should have a list of circle members" do
+    @rick_rubin = User.create(first_name: Faker::Name.first_name,
+                              last_name: Faker::Name.last_name,
+                              user_name: Faker::Internet.user_name,
+                              email: "a",
+                              avatar: Faker::Avatar.image,
+                              location: Faker::Address.city,
+                              password: "poppop")
+    @new_beat = Track.create(download_url: "something",
+                             track_name: "rock beat",
+                             creator_id: @rick_rubin.id)
+    visit circle_path(@xmas)
+    expect(page).to_not have_content(@rick_rubin.user_name)
+    Submission.create(original_id: @new_beat.id,
+                      circle_id: @xmas.id)
+    visit circle_path(@xmas)
+    expect(page).to have_content(@rick_rubin.user_name)
   end
 end
