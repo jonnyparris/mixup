@@ -23,6 +23,10 @@ class CirclesController < ApplicationController
     end
   end
 
+  def show
+    @circle = Circle.includes(:creator, :submissions).find(params[:id])
+  end
+
   private
 
   def circle_params
