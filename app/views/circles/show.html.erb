@@ -1,0 +1,9 @@
+<div class="row">
+  <h3><%= @circle.name %></h3>
+    <h4>Current Members</h4>
+    <ul>
+      <% @circle_members.each do |member| %>
+      <li><%= member.user_name %></li>
+      <% end %>
+    </ul>
+</div>
