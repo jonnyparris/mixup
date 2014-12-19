@@ -36,16 +36,17 @@ feature "View, then join Circle" do
     @rick_rubin = User.create(first_name: Faker::Name.first_name,
                               last_name: Faker::Name.last_name,
                               user_name: Faker::Internet.user_name,
-                              email: "a",
+                              email: "b",
                               avatar: Faker::Avatar.image,
                               location: Faker::Address.city,
                               password: "poppop")
-    @new_beat = Track.create(download_url: "something",
+    @newer_beat = Track.create(download_url: "something",
                              track_name: "rock beat",
                              creator_id: @rick_rubin.id)
     visit circle_path(@xmas)
     expect(page).to_not have_content(@rick_rubin.user_name)
-    Submission.create(original_id: @new_beat.id,
+    Submission.delete_all
+    @submission_attempt = Submission.create(original_id: @newer_beat.id,
                       circle_id: @xmas.id)
     visit circle_path(@xmas)
     expect(page).to have_content(@rick_rubin.user_name)
