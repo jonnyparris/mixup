@@ -16,5 +16,7 @@ RSpec.describe Submission, :type => :model do
   describe "validations" do
     it { should validate_presence_of(:original_id) }
     it { should validate_presence_of(:circle_id) }
+    it { should validate_uniqueness_of(:original_id).case_insensitive.scoped_to(:circle_id) }
+    it { should validate_uniqueness_of(:remix_id).case_insensitive.scoped_to(:circle_id) }
   end
 end
