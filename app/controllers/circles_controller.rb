@@ -27,6 +27,7 @@ class CirclesController < ApplicationController
     @circle = Circle.includes(:creator, :submissions).find(params[:id])
     @circle_members = Submission.where(circle_id: @circle.id)
                                   .map { |submission| submission.original.creator }
+    @stems = current_user.stems
   end
 
   private

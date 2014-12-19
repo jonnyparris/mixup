@@ -1,9 +1,15 @@
 <div class="row">
   <h3><%= @circle.name %></h3>
+    <h4>Pick a set of stems to submit to this circle</h4>
+    <ul>
+      <% @stems.each do |stem| %>
+        <li><%= stem.track_name %></li>
+      <% end %>
+    </ul>
     <h4>Current Members</h4>
     <ul>
       <% @circle_members.each do |member| %>
-      <li><%= member.user_name %></li>
+        <li><%= member.user_name %></li>
       <% end %>
     </ul>
 </div>

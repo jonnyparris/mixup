@@ -13,8 +13,9 @@ RSpec.describe User, :type => :model do
   end
 
   describe "associations" do
-    it { should have_many(:tracks) }
-    it { should have_many(:circles) }
+    it { should have_many(:stems).class_name('Track').with_foreign_key('creator_id') }
+    it { should have_many(:remixes).class_name('Track').with_foreign_key('creator_id') }
+    it { should have_many(:circles).with_foreign_key('creator_id') }
   end
 
   describe "validations" do
