@@ -40,7 +40,7 @@
           <% end %>
 
           <ul class="off-canvas-list">
-            <li><label>User Menu</label></li>
+            <li><label><%= @current_user.user_name %> User Menu</label></li>
             <li><%= link_to("Account", edit_user_path(@current_user)) %></li>
             <li><%= link_to("Create Circle", new_circle_path) %></li>
             <li><%= link_to("View My Stems", user_stems_path(@current_user)) %></li>
