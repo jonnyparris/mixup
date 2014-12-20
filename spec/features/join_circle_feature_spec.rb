@@ -27,9 +27,9 @@ feature "View, then join Circle" do
   scenario "should be successful if within signup deadline" do
     visit circle_path(@xmas)
     expect(page).to have_content("Join")
-    click_link @new_beat.track_name
+    click_button @new_beat.track_name
     expect(page).to_not have_content("Join")
-    expect(page).to have_content("Undo")
+    expect(page).to have_content("UNDO")
   end
 
   scenario "should have a list of circle members" do
