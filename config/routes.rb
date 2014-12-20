@@ -13,7 +13,9 @@ Rails.application.routes.draw do
     resources :tracks, as: :stems
   end
 
-  resources :circles
+  resources :circles do
+    resources :submissions, only: [:create, :destroy]
+  end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
