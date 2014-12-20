@@ -28,6 +28,9 @@ class CirclesController < ApplicationController
     @circle_members = Submission.where(circle_id: @circle.id)
                                   .map { |submission| submission.original.creator }
     @stems = current_user.stems
+    unless @circle_members.include? @current_user
+      @submission = Submission.new
+    end
   end
 
   private

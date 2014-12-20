@@ -1,11 +1,19 @@
 <div class="row">
   <h3><%= @circle.name %></h3>
-    <h4>Pick a set of stems to submit to this circle</h4>
-    <ul>
+  <% if @submission %>
+    <h4>Join this circle with one of your stems below</h4>
+    <ul class="inline-list">
       <% @stems.each do |stem| %>
-        <li><%= stem.track_name %></li>
+        <li>
+          <%= form_for @submission, url: circle_submissions_path(circle_id: @circle.id) do |f| %>
+            <%= f.hidden_field :circle_id, value: @circle.id %>
+            <%= f.hidden_field :original_id, value: stem.id %>
+            <%= f.submit "#{stem.track_name}", :disable_with => 'Submitting...', class: "button round small" %>
+          <% end %>
+        </li>
       <% end %>
     </ul>
+  <% end %>
     <h4>Current Members</h4>
     <ul>
       <% @circle_members.each do |member| %>
