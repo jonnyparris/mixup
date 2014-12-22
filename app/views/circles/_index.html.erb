@@ -23,7 +23,7 @@
             <% elsif days_to_signup < 0 #and current user is subscribed (TODO)%>
               <p>In progress</p>
             <% else %>
-              <p><%=days_to_signup%> days left to <a href="#">join!</a></p>
+              <p><%=days_to_signup%> days left to <%= link_to("join!", circle_path(circle)) %></p>
             <% end %>
 
             <p>created by: <%= circle.creator.user_name %></p>
