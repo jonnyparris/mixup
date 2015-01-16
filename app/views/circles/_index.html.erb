@@ -15,7 +15,12 @@
         <% days_to_signup = ((circle.signup_deadline - DateTime.now)/86400).floor %>
         <% days_to_submit = ((circle.submit_deadline - DateTime.now)/86400).floor %>
         <li>
-          <div class="circle-thumb">
+          <% if circle.creator == @current_user %>
+            <div class="circle-thumb my-circle">
+          <% else %>
+            <div class="circle-thumb">
+          <% end %>
+
             <h3><%= "##{circle.id}-#{circle.name}" %></h3>
             <p>
               <% if circle.submissions.count > 1 %>
