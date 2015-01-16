@@ -3,7 +3,7 @@ class CirclesController < ApplicationController
   before_action :current_user
 
   def index
-    @circles = Circle.includes(:creator)
+    @circles = Circle.includes(:creator, :submissions)
     render "_index"
   end
 

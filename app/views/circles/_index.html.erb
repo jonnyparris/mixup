@@ -17,7 +17,13 @@
         <li>
           <div class="circle-thumb">
             <h3><%= "##{circle.id}-#{circle.name}" %></h3>
-
+            <p>
+              <% if circle.submissions.count > 1 %>
+                <%= "#{circle.submissions.count} members so far," %>
+              <% else %>
+                <%= "1 member so far," %>
+              <% end %>
+            </p>
             <% if days_to_signup < 0 && days_to_submit < 0 %>
               <p>FINISHED - <a href="#">view remixes</a></p>
             <% elsif days_to_signup < 0 #and current user is subscribed (TODO)%>
