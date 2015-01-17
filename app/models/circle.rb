@@ -21,4 +21,16 @@ class Circle < ActiveRecord::Base
   def has_admin(user)
     self.creator == user
   end
+
+  def mixup
+    stems = self.submissions.map { |submission| submission.original }
+    remixers = self.members.clone
+    first_random_rotation_integer = (1..stems.length-1).to_a.sample
+    second_random_rotation_integer = (1..stems.length-1).to_a.sample
+
+    stems.rotate!(first_random_rotation_integer)
+    remixers.rotate!(first_random_rotation_integer)
+    remixers.rotate!(second_random_rotation_integer)
+    @allocations = Hash[stems.zip(remixers)]
+  end
 end
