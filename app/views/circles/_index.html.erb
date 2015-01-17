@@ -23,32 +23,45 @@
 
             <h3><%= "##{circle.id}-#{circle.name}" %></h3>
             <p>
-              <% if circle.submissions.count > 1 %>
-                <%= "#{circle.submissions.count} members so far," %>
-              <% else %>
+              <% if circle.submissions.count == 1 %>
                 <%= "1 member so far," %>
+              <% else %>
+                <%= "#{circle.submissions.count} members so far," %>
               <% end %>
             </p>
 
-            <% if days_to_signup < 0 && days_to_submit < 0 %>
-              <p>FINISHED - <a href="#">view remixes</a></p>
-            <% elsif days_to_signup < 0 #and current user is subscribed (TODO)%>
-              <p>In progress</p>
-            <% end %>
-
             <% if circle.creator == @current_user %>
-              <p><%=days_to_signup%> days before signup deadline</p>
+              <% if days_to_signup < 0 && days_to_submit < 0 %>
+                <p>FINISHED - <a href="#">view remixes</a></p>
+              <% elsif days_to_signup < 0 && circle.has_member(@current_user) %>
+                <p>In progress</p>
+                <p><%=days_to_submit%> days left to <%= link_to("submit your remix", circle_path(circle)) %></p>
+              <% elsif days_to_signup < 0 %>
+                <p>In progress, <%=days_to_submit%> days until submission deadline.</p>
+              <% else %>
+                <p><%=days_to_signup%> days before signup deadline</p>
+              <% end %>
+
               <p>created by: YOU</p>
               <p class="text-right">
                 <%= link_to("Manage this circle", circle_path(circle)) %>
               </p>
             <% else %>
-              <p><%=days_to_signup%> days left to <%= link_to("join!", circle_path(circle)) %></p>
-              <p>created by: <%= circle.creator.user_name %></p>
-              <img src="<%= circle.creator.avatar %>" alt=<%= "#{circle.creator.user_name} profile pic" %>>
-              <p class="text-right">
-                <%= link_to("More details", circle_path(circle)) %>
-              </p>
+              <% if days_to_signup < 0 && days_to_submit < 0 %>
+                <p>FINISHED - <a href="#">view remixes</a></p>
+              <% elsif days_to_signup < 0 && circle.has_member(@current_user) %>
+                <p>In progress</p>
+                <p><%=days_to_submit%> days left to <%= link_to("submit your remix", circle_path(circle)) %></p>
+              <% elsif days_to_signup < 0 %>
+                <p>In progress, <%=days_to_submit%> days until remixes unveiled.</p>
+              <% else %>
+                <p><%=days_to_signup%> days left to <%= link_to("join!", circle_path(circle)) %></p>
+              <% end %>
+                <p>created by: <%= circle.creator.user_name %></p>
+                <img src="<%= circle.creator.avatar %>" alt=<%= "#{circle.creator.user_name} profile pic" %>>
+                <p class="text-right">
+                  <%= link_to("More details", circle_path(circle)) %>
+                </p>
             <% end %>
 
           </div>
