@@ -14,4 +14,8 @@ class Circle < ActiveRecord::Base
                                   .map { |submission| submission.original.creator }
     circle_members.include? user
   end
+
+  def has_admin(user)
+    self.creator == user
+  end
 end

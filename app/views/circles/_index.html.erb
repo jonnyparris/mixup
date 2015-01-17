@@ -15,7 +15,7 @@
         <% days_to_signup = ((circle.signup_deadline - DateTime.now)/86400).floor %>
         <% days_to_submit = ((circle.submit_deadline - DateTime.now)/86400).floor %>
         <li>
-          <% if circle.creator == @current_user %>
+          <% if circle.has_admin(@current_user) %>
             <div class="circle-thumb my-circle">
           <% else %>
             <div class="circle-thumb">
@@ -30,7 +30,7 @@
               <% end %>
             </p>
 
-            <% if circle.creator == @current_user %>
+            <% if circle.has_admin(@current_user) %>
               <% if days_to_signup < 0 && days_to_submit < 0 %>
                 <p>FINISHED - <a href="#">view remixes</a></p>
               <% elsif days_to_signup < 0 && circle.has_member(@current_user) %>
