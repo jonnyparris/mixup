@@ -25,10 +25,9 @@ class CirclesController < ApplicationController
 
   def show
     @circle = Circle.includes(:creator, :submissions).find(params[:id])
-    @circle_members = Submission.where(circle_id: @circle.id)
-                                  .map { |submission| submission.original.creator }
-    @stems = current_user.stems
-    unless @circle_members.include? @current_user
+    @circle_members = @circle.members
+    @stems = @current_user.stems
+    unless @circle.has_member @current_user
       @submission = Submission.new
     end
   end

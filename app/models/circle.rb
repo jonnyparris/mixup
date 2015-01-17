@@ -9,10 +9,13 @@ class Circle < ActiveRecord::Base
   validates_uniqueness_of :name, scope: :creator_id
   validates :signup_deadline, date: { before: :submit_deadline }
 
+  def members
+    Submission.where(circle_id: self.id)
+                 .map { |submission| submission.original.creator }
+  end
+
   def has_member(user)
-    circle_members = Submission.where(circle_id: self.id)
-                                  .map { |submission| submission.original.creator }
-    circle_members.include? user
+    self.members.include? user
   end
 
   def has_admin(user)
