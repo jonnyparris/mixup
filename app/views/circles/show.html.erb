@@ -1,23 +1,34 @@
 <div class="row">
   <h3><%= @circle.name %></h3>
-  <% if @submission %>
-    <h4>Join this circle with one of your stems below</h4>
-    <ul class="inline-list">
-      <% @stems.each do |stem| %>
-        <li>
-          <%= form_for @submission, url: circle_submissions_path(circle_id: @circle.id) do |f| %>
-            <%= f.hidden_field :circle_id, value: @circle.id %>
-            <%= f.hidden_field :original_id, value: stem.id %>
-            <%= f.submit "#{stem.track_name}", :disable_with => 'Submitting...', class: "button round small" %>
-          <% end %>
-        </li>
-      <% end %>
-    </ul>
-  <% end %>
+
+    <% if @submission %>
+      <h4>Join this circle with one of your stems below</h4>
+      <ul class="inline-list">
+        <% @stems.each do |stem| %>
+          <li>
+            <%= form_for @submission, url: circle_submissions_path(circle_id: @circle.id) do |f| %>
+              <%= f.hidden_field :circle_id, value: @circle.id %>
+              <%= f.hidden_field :original_id, value: stem.id %>
+              <%= f.submit "#{stem.track_name}", :disable_with => 'Submitting...', class: "button round small" %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+
     <h4>Current Members</h4>
     <ul>
       <% @circle_members.each do |member| %>
         <li><%= member.user_name %></li>
       <% end %>
     </ul>
+
+    <% if @circle.has_admin(@current_user) %>
+      <ul class="inline-list">
+        <li><a href="#">Start mixup now</a></li>
+        <li><a href="#">Change deadlines</a></li>
+        <li><a href="#">Delete circle & notify members</a></li>
+      </ul>
+    <% end %>
+
 </div>
