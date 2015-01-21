@@ -32,5 +32,7 @@ class Circle < ActiveRecord::Base
     remixers.rotate!(first_random_rotation_integer)
     remixers.rotate!(second_random_rotation_integer)
     @allocations = Hash[stems.zip(remixers)]
+    self.allocation = @allocations.to_json
+    self.save!
   end
 end
