@@ -5,6 +5,7 @@ RSpec.describe Circle, :type => :model do
     it { should respond_to(:name) }
     it { should respond_to(:signup_deadline) }
     it { should respond_to(:submit_deadline) }
+    it { should respond_to(:allocation) }
 
     it { should respond_to(:creator_id) }
   end
