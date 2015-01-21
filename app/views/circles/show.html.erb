@@ -23,6 +23,11 @@
       <% end %>
     </ul>
 
+    <% if @circle.needs_remix_from(@current_user.id) %>
+      <h4>Waiting for your remix of...</h4>
+      <%= link_to("#{@circle.allocated_stem(@current_user.id).track_name}", "#{@circle.allocated_stem(@current_user.id).download_url}") %>
+    <% end %>
+
     <% if @circle.has_admin(@current_user) %>
       <ul class="inline-list">
         <li><a href="#">Start mixup now</a></li>

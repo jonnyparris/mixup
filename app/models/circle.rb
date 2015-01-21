@@ -31,8 +31,21 @@ class Circle < ActiveRecord::Base
     stems.rotate!(first_random_rotation_integer)
     remixers.rotate!(first_random_rotation_integer)
     remixers.rotate!(second_random_rotation_integer)
-    @allocations = Hash[stems.zip(remixers)]
+    @allocations = Hash[remixers.zip(stems)]
     self.allocation = @allocations.to_json
     self.save!
+  end
+
+  def allocation_hash
+    return false if self.allocation.nil?
+    JSON.parse(self.allocation)
+  end
+
+  def needs_remix_from(user_id)
+    self.allocation_hash.keys.include? "#{user_id}"
+  end
+
+  def allocated_stem(user_id)
+    Track.find(self.allocation_hash["#{user_id}"])
   end
 end
