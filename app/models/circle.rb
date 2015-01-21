@@ -23,8 +23,8 @@ class Circle < ActiveRecord::Base
   end
 
   def mixup
-    stems = self.submissions.map { |submission| submission.original }
-    remixers = self.members.clone
+    stems = self.submissions.map { |submission| submission.original.id }
+    remixers = self.members.map { |member| member.id }
     first_random_rotation_integer = (1..stems.length-1).to_a.sample
     second_random_rotation_integer = (1..stems.length-1).to_a.sample
 
