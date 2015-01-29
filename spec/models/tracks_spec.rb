@@ -19,4 +19,8 @@ RSpec.describe Track, :type => :model do
     it { should validate_presence_of(:creator_id) }
     it { should validate_uniqueness_of(:track_name).case_insensitive.scoped_to(:creator_id) }
   end
+
+  it "has a valid factory" do
+    expect(build(:track)).to be_valid
+  end
 end
