@@ -27,4 +27,8 @@ RSpec.describe User, :type => :model do
     it { should validate_uniqueness_of(:email).case_insensitive }
     it { should validate_uniqueness_of(:user_name).case_insensitive }
   end
+
+  it "has a valid factory" do
+    expect(FactoryGirl.build(:user)).to be_valid
+  end
 end
