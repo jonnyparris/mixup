@@ -37,15 +37,16 @@ class Circle < ActiveRecord::Base
   end
 
   def allocation_hash
-    return false if self.allocation.nil?
     JSON.parse(self.allocation)
   end
 
   def needs_remix_from(user_id)
+    return false if self.allocation.nil?
     self.allocation_hash.keys.include? "#{user_id}"
   end
 
   def allocated_stem(user_id)
+    return false if self.allocation.nil?
     Track.find(self.allocation_hash["#{user_id}"])
   end
 end
