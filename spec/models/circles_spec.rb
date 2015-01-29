@@ -26,4 +26,8 @@ RSpec.describe Circle, :type => :model do
       expect(invalid_circle).to have(1).errors_on(:signup_deadline)
     end
   end
+
+  it "has a valid factory" do
+    expect(build(:circle)).to be_valid
+  end
 end
