@@ -28,6 +28,6 @@ RSpec.describe Circle, :type => :model do
   end
 
   it "has a valid factory" do
-    expect(build(:circle)).to be_valid
+    expect(build(:future_circle)).to be_valid
   end
 end

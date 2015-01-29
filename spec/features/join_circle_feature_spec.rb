@@ -9,7 +9,7 @@ feature "View, then join Circle" do
     Track.delete_all
     @new_beat = create(:track, creator: @j_dilla)
     Circle.delete_all
-    @xmas = create(:circle, creator: @j_dilla)
+    @xmas = create(:future_circle, creator: @j_dilla)
   end
 
   scenario "should be successful if within signup deadline" do
