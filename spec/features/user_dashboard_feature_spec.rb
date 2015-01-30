@@ -10,9 +10,7 @@ describe "User Dashboard" do
   end
 
   it "includes a link to previous circles only when there are previous circles to return to" do
-    40.times do
-      create(:future_circle, creator: @j_dilla)
-    end
+    create_list(:future_circle, 40, creator: @j_dilla)
     visit user_dashboard_path(@j_dilla.id)
     expect(page).to_not have_content("Prev")
     click_link "More Circles"
