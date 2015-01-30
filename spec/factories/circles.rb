@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :circle do
     creator
-    name Faker::Company.name
+    sequence(:name) { |n| "#{Faker::Company.name}#{n}" }
 
     trait :future do
       signup_deadline Faker::Time.forward(23, :midnight)
