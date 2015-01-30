@@ -1,11 +1,10 @@
 FactoryGirl.define do
   factory :submission do
-    association :circle, :future
+    circle
     original
     remix
 
     trait :no_remix do
-      original
       remix nil
     end
 
