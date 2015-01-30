@@ -25,4 +25,13 @@ describe "Circles" do
     click_button("Create Circle")
     expect(page).to have_content("Sweet!")
   end
+
+  scenario "should have a manage link if created by current user" do
+    create(:future_circle)
+    visit user_dashboard_path(@j_dilla)
+    expect(page).to_not have_content("Manage")
+    create(:future_circle, creator: @j_dilla)
+    visit user_dashboard_path(@j_dilla)
+    expect(page).to have_content("Manage")
+  end
 end
