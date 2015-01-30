@@ -1,19 +1,7 @@
 describe "User Dashboard" do
   before :each do
-    User.delete_all
-    Circle.delete_all
-    @j_dilla = User.create(first_name: Faker::Name.first_name,
-                           last_name: Faker::Name.last_name,
-                           user_name: Faker::Internet.user_name,
-                           email: "a",
-                           avatar: Faker::Avatar.image,
-                           location: Faker::Address.city,
-                           password: "poppop"
-                           )
-    visit login_path
-    fill_in "email", with: "a"
-    fill_in "password", with: "poppop"
-    click_button("Login")
+    @j_dilla = create(:user)
+    page.set_rack_session(user_id: @j_dilla.id)
   end
 
   it "includes list of all circles by default, but declares if there are no circles" do

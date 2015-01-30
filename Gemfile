@@ -43,6 +43,8 @@ group :development, :test do
   gem 'factory_girl_rails'
 end
 
+gem 'rack_session_access',      group: :test
+
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 

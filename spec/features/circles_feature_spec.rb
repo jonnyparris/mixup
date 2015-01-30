@@ -1,12 +1,7 @@
 describe "Circles" do
   before :each do
-    Circle.delete_all
-    User.delete_all
     @j_dilla = create(:user)
-    visit login_path
-    fill_in "email", with: @j_dilla.email
-    fill_in "password", with: "poppop"
-    click_button("Login")
+    page.set_rack_session(user_id: @j_dilla.id)
   end
 
   it "index list exists" do
