@@ -19,4 +19,9 @@ RSpec.describe Submission, :type => :model do
     it { should validate_uniqueness_of(:original_id).case_insensitive.scoped_to(:circle_id) }
     it { should validate_uniqueness_of(:remix_id).case_insensitive.scoped_to(:circle_id) }
   end
+
+  it "has a valid factory" do
+    expect(build(:submission)).to be_valid
+    expect(build(:stem_submit)).to be_valid
+  end
 end
