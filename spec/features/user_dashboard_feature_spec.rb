@@ -11,10 +11,7 @@ describe "User Dashboard" do
 
   it "includes a link to previous circles only when there are previous circles to return to" do
     40.times do
-           Circle.create(name: Faker::Commerce.color,
-                  signup_deadline: Faker::Time.forward(2, :midnight),
-                  submit_deadline: Faker::Time.forward(80, :midnight),
-                  creator_id: @j_dilla.id)
+      create(:future_circle, creator: @j_dilla)
     end
     visit user_dashboard_path(@j_dilla.id)
     expect(page).to_not have_content("Prev")
