@@ -3,7 +3,7 @@ feature "Mixup Circle" do
   before do
     @j_dilla = create(:user)
     page.set_rack_session(user_id: @j_dilla.id)
-    @new_beat = create(:track, creator: @j_dilla)
+    @new_beat = create(:track, creator: @j_dilla, track_name: "HippityHop")
   end
 
   scenario "should only be an option for circles created by current user" do
@@ -26,6 +26,15 @@ feature "Mixup Circle" do
     expect(page).to have_content("Waiting for")
   end
 
+  scenario "should never assign a stem back to its owner to remix" do
+    present_circle = create(:present_circle)
+    create_list(:stem_submit, 5, circle: present_circle)
+    create(:submission, circle: present_circle, original: @new_beat)
+    present_circle.mixup
+    visit circle_path(present_circle)
+    expect(page).to_not have_content("#{@new_beat.track_name} - click to download")
+  end
+
   xscenario "should trigger when signup deadline passes" do
 
   end
@@ -34,7 +43,4 @@ feature "Mixup Circle" do
 
   end
 
-  xscenario "should never assign a stem back to its owner to remix" do
-
-  end
 end
