@@ -25,7 +25,7 @@
 
     <% if @circle.needs_remix_from(@current_user.id) %>
       <h4>Waiting for your remix of...</h4>
-      <%= link_to("#{@circle.allocated_stem(@current_user.id).track_name}", "#{@circle.allocated_stem(@current_user.id).download_url}") %>
+      <%= link_to("#{@circle.allocated_stem(@current_user.id).track_name} - click to download", "#{@circle.allocated_stem(@current_user.id).download_url}") %>
       <p><a href="#">Submit your remix!</a></p>
     <% end %>
 
