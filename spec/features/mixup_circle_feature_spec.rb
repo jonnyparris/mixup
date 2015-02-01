@@ -35,12 +35,14 @@ feature "Mixup Circle" do
     expect(page).to_not have_content("#{@new_beat.track_name} - click to download")
   end
 
-  xscenario "should trigger when signup deadline passes" do
-
-  end
-
-  xscenario "should fail if less than 3 members" do
-
+  scenario "should fail if less than 3 members" do
+    present_circle = create(:present_circle)
+    create_list(:stem_submit, 2, circle: present_circle)
+    visit circle_path(present_circle)
+    expect(page).to_not have_content("Waiting for")
+    present_circle.mixup
+    visit circle_path(present_circle)
+    expect(page).to_not have_content("Waiting for")
   end
 
 end
