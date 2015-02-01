@@ -23,6 +23,7 @@ class Circle < ActiveRecord::Base
   end
 
   def mixup
+    return false if self.members.count < 3
     stems = self.submissions.map { |submission| submission.original.id }
     remixers = self.members.map { |member| member.id }
     first_random_rotation_integer = (1..stems.length-1).to_a.sample
