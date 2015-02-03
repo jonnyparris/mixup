@@ -22,12 +22,23 @@ class SubmissionsController < ApplicationController
   def update
     find_submission
     if @submission.update_attributes(submission_params)
-      flash[:success] = "Success! Remix was successfully submitted"
+      undo_link = view_context.link_to('UNDO', delete_remix_path(id: @submission.circle_id, stem_id: @submission.original.id), method: :delete).html_safe
+      flash[:success] = "Success! Remix was successfully submitted - #{undo_link}"
       redirect_to circle_path(@submission.circle)
     else
       flash[:error] = "Submission failed - something went wrong"
       redirect_to edit_remix_path(@submission)
     end
+  end
+
+  def destroy_remix
+    find_submission
+    if @submission.destroy_remix
+      flash[:success] = "Submission was successfully UNDID"
+    else
+      flash[:error] = "Something went wrong"
+    end
+    redirect_to circle_path(params[:id])
   end
 
   def destroy

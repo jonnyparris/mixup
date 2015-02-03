@@ -28,7 +28,7 @@
       <%= link_to("#{@circle.allocated_stem(@current_user.id).track_name} - click to download", "#{@circle.allocated_stem(@current_user.id).download_url}") %>
       <p>
         <%= link_to("Submit your remix!", "#{edit_remix_path(id: @circle.id,
-                                                               stem_id: @circle.allocated_stem(@current_user.id).id)}") %>
+                                                             stem_id: @circle.allocated_stem(@current_user.id).id)}") %>
       </p>
     <% end %>
 

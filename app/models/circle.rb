@@ -43,6 +43,7 @@ class Circle < ActiveRecord::Base
 
   def needs_remix_from(user_id)
     return false if self.allocation.nil?
+    return false unless Submission.find_by(circle_id: self.id, original_id: self.allocated_stem(user_id).id).remix_id.nil?
     self.allocation_hash.keys.include? "#{user_id}"
   end
 

@@ -16,9 +16,8 @@ feature "Submit Remix" do
     click_button "#{remix.track_name}"
     expect(page).to have_content("#{@present_circle.name}")
     expect(page).to have_content("Success!")
+    expect(page).to have_content("UNDO")
+    expect(page).to_not have_content("Waiting for")
   end
 
-  xscenario "should be undoable until submission deadline but not after" do
-
-  end
 end

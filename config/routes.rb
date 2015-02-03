@@ -13,7 +13,8 @@ Rails.application.routes.draw do
     resources :tracks, as: :stems
   end
 
-  get 'circles/:id/submit_remix/:stem_id' => 'submissions#edit_remix', as: :edit_remix
+  get     'circles/:id/submit_remix/:stem_id' => 'submissions#edit_remix',    as: :edit_remix
+  delete  'circles/:id/submit_remix/:stem_id' => 'submissions#destroy_remix', as: :delete_remix
 
   resources :circles do
     resources :submissions, only: [:create, :destroy, :update]
