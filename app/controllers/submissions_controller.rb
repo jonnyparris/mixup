@@ -14,6 +14,22 @@ class SubmissionsController < ApplicationController
     redirect_to circle_path(@submission.circle)
   end
 
+  def edit_remix
+    @submission = Submission.find_by(circle_id: params[:id], original_id: params[:stem_id])
+    @tracks = @current_user.stems
+  end
+
+  def update
+    find_submission
+    if @submission.update_attributes(submission_params)
+      flash[:success] = "Success! Remix was successfully submitted"
+      redirect_to circle_path(@submission.circle)
+    else
+      flash[:error] = "Submission failed - something went wrong"
+      redirect_to edit_remix_path(@submission)
+    end
+  end
+
   def destroy
     find_submission
     if @submission.destroy

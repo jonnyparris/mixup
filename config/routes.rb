@@ -13,8 +13,10 @@ Rails.application.routes.draw do
     resources :tracks, as: :stems
   end
 
+  get 'circles/:id/submit_remix/:stem_id' => 'submissions#edit_remix', as: :edit_remix
+
   resources :circles do
-    resources :submissions, only: [:create, :destroy]
+    resources :submissions, only: [:create, :destroy, :update]
   end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
