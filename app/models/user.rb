@@ -13,4 +13,8 @@ class User < ActiveRecord::Base
 
   validates_uniqueness_of :user_name, case_sensitive: false
   validates_uniqueness_of :email, case_sensitive: false
+
+  def allocated_stem(circle_id)
+    Circle.find(circle_id).allocated_stem(self.id)
+  end
 end
