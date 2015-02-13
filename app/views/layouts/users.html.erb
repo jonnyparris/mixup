@@ -12,12 +12,6 @@
   </head>
 
   <body>
-    <% if params[:user_id] %>
-      <% @this_user = params[:user_id] %>
-    <% else %>
-      <% @this_user = params[:id] %>
-    <% end %>
-
     <div class="off-canvas-wrap" data-offcanvas>
       <main class="inner-wrap">
 
@@ -30,23 +24,27 @@
 
           <section class="top-bar-section">
             <ul class="right">
-              <li><a href="#">Messages</a></li>
               <li><%= link_to("Logout", logout_path) %></li>
             </ul>
 
             <ul class="left">
               <li><a href="#" class="left-off-canvas-toggle menu-icon">Menu</a></li>
-              <li><%= link_to("Dashboard", user_dashboard_path(id: @this_user)) %></li>
+              <li><%= link_to("Dashboard", user_dashboard_path(@current_user)) %></li>
             </ul>
           </section>
         </nav>
 
         <aside id="user-menu" class="left-off-canvas-menu">
+          <% if @current_user.avatar %>
+            <img src=<%= "#{@current_user.avatar}" %> alt="your profile picture">
+          <% end %>
+
           <ul class="off-canvas-list">
-            <li><label>User Menu</label></li>
-            <li><%= link_to("Account", edit_user_path(id: @this_user)) %></li>
-            <li><a href="#">Create Circle</a></li>
-            <li><%= link_to("Add Stems", new_user_stem_path(user_id: @this_user)) %></li>
+            <li><label><%= @current_user.user_name %> User Menu</label></li>
+            <li><%= link_to("Account", edit_user_path(@current_user)) %></li>
+            <li><%= link_to("Create Circle", new_circle_path) %></li>
+            <li><%= link_to("View My Stems", user_stems_path(@current_user)) %></li>
+            <li><%= link_to("Add Stems", new_user_stem_path(@current_user)) %></li>
             <li><a href="#">Upload Remix</a></li>
           </ul>
         </aside>
@@ -54,7 +52,7 @@
         <div class="current-container">
           <% if flash[:success] %>
             <div data-alert class="alert-box success radius">
-              <%= flash[:success] %>
+              <%= raw(flash[:success]) %>
               <a href="#" class="close">&times;</a>
             </div>
           <% end %>

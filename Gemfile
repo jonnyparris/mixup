@@ -40,7 +40,10 @@ group :development, :test do
   gem 'date_validator'
   gem 'rspec-collection_matchers'
   gem 'faker'
+  gem 'factory_girl_rails'
 end
+
+gem 'rack_session_access',      group: :test
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'

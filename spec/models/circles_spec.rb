@@ -5,6 +5,7 @@ RSpec.describe Circle, :type => :model do
     it { should respond_to(:name) }
     it { should respond_to(:signup_deadline) }
     it { should respond_to(:submit_deadline) }
+    it { should respond_to(:allocation) }
 
     it { should respond_to(:creator_id) }
   end
@@ -24,5 +25,9 @@ RSpec.describe Circle, :type => :model do
       invalid_circle = Circle.new(name: 'Xmas Giggles', signup_deadline: '1/12/2014', submit_deadline: '1/11/2014')
       expect(invalid_circle).to have(1).errors_on(:signup_deadline)
     end
+  end
+
+  it "has a valid factory" do
+    expect(build(:future_circle)).to be_valid
   end
 end

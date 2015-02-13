@@ -8,12 +8,17 @@ Rails.application.routes.draw do
   root 'static_pages#index'
 
   get 'users/:id/dashboard' => 'users#dashboard', as: :user_dashboard
-  get 'circles/index' => 'circles#index'
 
   resources :users do
     resources :tracks, as: :stems
   end
 
+  get     'circles/:id/submit_remix/:stem_id' => 'submissions#edit_remix',    as: :edit_remix
+  delete  'circles/:id/submit_remix/:stem_id' => 'submissions#destroy_remix', as: :delete_remix
+
+  resources :circles do
+    resources :submissions, only: [:create, :destroy, :update]
+  end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

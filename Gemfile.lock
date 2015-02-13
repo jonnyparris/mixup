@@ -49,6 +49,11 @@ GEM
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.2.2)
+    factory_girl (4.4.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.4.1)
+      factory_girl (~> 4.4.0)
+      railties (>= 3.0.0)
     faker (1.4.3)
       i18n (~> 0.5)
     foundation-rails (5.4.5.0)
@@ -77,6 +82,9 @@ GEM
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
+    rack_session_access (0.1.1)
+      builder (>= 2.0.0)
+      rack (>= 1.0.0)
     rails (4.1.5)
       actionmailer (= 4.1.5)
       actionpack (= 4.1.5)
@@ -164,11 +172,13 @@ DEPENDENCIES
   capybara
   coffee-rails (~> 4.0.0)
   date_validator
+  factory_girl_rails
   faker
   foundation-rails
   jbuilder (~> 2.0)
   jquery-rails
   pg
+  rack_session_access
   rails (= 4.1.5)
   rails-erd
   rspec-collection_matchers

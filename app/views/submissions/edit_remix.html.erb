@@ -1,0 +1,19 @@
+<div class="row">
+  <h3><%= @submission.circle.name %></h3>
+
+    <h4>Select one of your tracks below to submit as the remix to these stems - <%= @submission.original.track_name %></h4>
+
+    <ul class="inline-list">
+      <% @tracks.each do |track| %>
+        <li>
+          <%= form_for @submission, url: circle_submission_path(circle_id: @submission.circle.id, id: @submission.id) do |f| %>
+            <%= f.hidden_field :remix_id, value: track.id %>
+            <%= f.hidden_field :circle_id, value: params[:id] %>
+            <%= f.hidden_field :original_id, value: params[:stem_id] %>
+            <%= f.submit "#{track.track_name}", :disable_with => 'Submitting...', class: "button round small" %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+
+</div>

@@ -63,7 +63,7 @@ class UsersController < ApplicationController
                                     :last_name,
                                     :user_name,
                                     :email,
-                                    :password_digest,
+                                    :password,
                                     :password_confirmation,
                                     :avatar,
                                     :location)

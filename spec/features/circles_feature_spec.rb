@@ -1,21 +1,37 @@
 describe "Circles" do
-  it "circles/index returns a list of all circles" do
-    User.delete_all
-    j_dilla = User.create(first_name: Faker::Name.first_name,
-                  last_name: Faker::Name.last_name,
-                  user_name: Faker::Internet.user_name,
-                  email: Faker::Internet.email,
-                  avatar: Faker::Avatar.image,
-                  location: Faker::Address.city,
-                  password_digest: "pop"
-                  )
-    Circle.delete_all
-    Circle.create(name: "Xmas remixes",
-           signup_deadline: Faker::Time.forward(23, :midnight),
-           submit_deadline: Faker::Time.forward(300, :midnight),
-           creator_id: j_dilla.id
-    )
-    visit 'circles/index'
-    expect(page).to have_content("Xmas remixes")
+  before :each do
+    @j_dilla = create(:user)
+    page.set_rack_session(user_id: @j_dilla.id)
+  end
+
+  it "index list exists" do
+    new_circle = create(:future_circle,creator: @j_dilla)
+    visit circles_path
+    expect(page).to have_content(new_circle.name)
+  end
+
+  scenario "should flag an error if creation fails" do
+    visit new_circle_path
+    click_button("Create Circle")
+    expect(page).to have_content("Sorry")
+  end
+
+  scenario "should create new Circle with minimal fields filled in" do
+    visit new_circle_path
+    nearly_new_circle = build(:future_circle)
+    fill_in "Name", with: nearly_new_circle.name
+    fill_in "Signup deadline", with: nearly_new_circle.signup_deadline
+    fill_in "Submit deadline", with: nearly_new_circle.submit_deadline
+    click_button("Create Circle")
+    expect(page).to have_content("Sweet!")
+  end
+
+  scenario "should have a manage link if created by current user" do
+    create(:future_circle)
+    visit user_dashboard_path(@j_dilla)
+    expect(page).to_not have_content("Manage")
+    create(:future_circle, creator: @j_dilla)
+    visit user_dashboard_path(@j_dilla)
+    expect(page).to have_content("Manage")
   end
 end

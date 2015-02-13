@@ -1,19 +1,7 @@
 feature "Add new tracks" do
   before :each do
-    User.delete_all
-    Track.delete_all
-    @j_dilla = User.create(first_name: Faker::Name.first_name,
-                           last_name: Faker::Name.last_name,
-                           user_name: Faker::Internet.user_name,
-                           email: "a",
-                           avatar: Faker::Avatar.image,
-                           location: Faker::Address.city,
-                           password: "pop"
-                           )
-    visit login_path
-    fill_in "email", with: "a"
-    fill_in "password", with: "pop"
-    click_button("Login")
+    @j_dilla = create(:user)
+    page.set_rack_session(user_id: @j_dilla.id)
   end
 
   scenario "should succeed for stems where user is specified" do
@@ -25,9 +13,9 @@ feature "Add new tracks" do
   end
 
   scenario "should be editable after creation" do
-    Track.create(download_url: "something", track_name: "BreezeBlock", creator_id: @j_dilla.id)
+    new_track = create(:track, creator: @j_dilla)
     visit user_stems_path(user_id: @j_dilla.id)
-    click_link("BreezeBlock")
+    click_link("#{new_track.track_name}")
     fill_in "Track name", with: "BoopyDoopy"
     click_button("Update")
     expect(page).to have_content("BoopyDoopy")
