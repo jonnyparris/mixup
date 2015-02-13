@@ -27,9 +27,7 @@ class CirclesController < ApplicationController
     @circle = Circle.includes(:creator, :submissions).find(params[:id])
     @circle_members = @circle.members
     @stems = @current_user.stems
-    unless @circle.has_member @current_user
-      @submission = Submission.new
-    end
+    @submission = Submission.new if @circle.has_member(@current_user) == false && @circle.status == "not started"
   end
 
   private
