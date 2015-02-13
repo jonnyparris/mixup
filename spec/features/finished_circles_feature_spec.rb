@@ -17,7 +17,8 @@ feature "Finished circles" do
   end
 
   scenario "should have all stems and remixes" do
+    remix = @past_circle.submissions.find_by(original: @new_beat1).remix
     expect(page).to have_content(@new_beat1.track_name)
-    expect(page).to have_content(@new_beat1_remix.track_name)
+    expect(page).to have_content(remix.track_name)
   end
 end

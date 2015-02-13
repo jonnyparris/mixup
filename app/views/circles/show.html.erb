@@ -1,43 +1,72 @@
 <div class="row">
   <h3><%= @circle.name %></h3>
 
-    <% if @submission %>
-      <h4>Join this circle with one of your stems below</h4>
-      <ul class="inline-list">
-        <% @stems.each do |stem| %>
+    <% if @circle.status == "finished" %>
+      <h4>Remixes</h4>
+      <ol>
+        <% @circle.submissions.each do |submission| %>
           <li>
-            <%= form_for @submission, url: circle_submissions_path(circle_id: @circle.id) do |f| %>
-              <%= f.hidden_field :circle_id, value: @circle.id %>
-              <%= f.hidden_field :original_id, value: stem.id %>
-              <%= f.submit "#{stem.track_name}", :disable_with => 'Submitting...', class: "button round small" %>
-            <% end %>
+            <ul class="inline-list">
+              <% if submission.remix.nil? %>
+                <li class="no-remix">
+                  NO REMIX SUBMITTED!
+                </li>
+              <% else %>
+                <li>
+                  <%= link_to("#{submission.remix.track_name} by #{submission.remix.creator.user_name}", "#{submission.remix.download_url}") %>
+                </li>
+              <% end %>
+              <li>
+                <%= link_to("#{submission.original.track_name} by #{submission.original.creator.user_name}", "#{submission.original.download_url}") %>
+              </li>
+            </ul>
           </li>
         <% end %>
-      </ul>
-    <% end %>
+      </ol>
 
-    <h4>Current Members</h4>
-    <ul>
-      <% @circle_members.each do |member| %>
-        <li><%= member.user_name %></li>
+    <% else %>
+      <% if @circle.status == "in progress" %>
+        <% if @circle.needs_remix_from(@current_user.id) %>
+          <h4>Waiting for your remix of...</h4>
+          <%= link_to("#{@circle.allocated_stem(@current_user.id).track_name} - click to download",
+                      "#{@circle.allocated_stem(@current_user.id).download_url}") %>
+          <p>
+            <%= link_to("Submit your remix!",
+                        "#{edit_remix_path(id: @circle.id,
+                                           stem_id: @circle.allocated_stem(@current_user.id).id)}") %>
+          </p>
+        <% end %>
+      <% else %>
+        <% if @submission %>
+          <h4>Join this circle with one of your stems below</h4>
+          <ul class="inline-list">
+            <% @stems.each do |stem| %>
+              <li>
+                <%= form_for @submission, url: circle_submissions_path(circle_id: @circle.id) do |f| %>
+                  <%= f.hidden_field :circle_id, value: @circle.id %>
+                  <%= f.hidden_field :original_id, value: stem.id %>
+                  <%= f.submit "#{stem.track_name}", :disable_with => 'Submitting...', class: "button round small" %>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
       <% end %>
-    </ul>
 
-    <% if @circle.needs_remix_from(@current_user.id) %>
-      <h4>Waiting for your remix of...</h4>
-      <%= link_to("#{@circle.allocated_stem(@current_user.id).track_name} - click to download", "#{@circle.allocated_stem(@current_user.id).download_url}") %>
-      <p>
-        <%= link_to("Submit your remix!", "#{edit_remix_path(id: @circle.id,
-                                                             stem_id: @circle.allocated_stem(@current_user.id).id)}") %>
-      </p>
-    <% end %>
-
-    <% if @circle.has_admin(@current_user) %>
-      <ul class="inline-list">
-        <li><a href="#">Start mixup now</a></li>
-        <li><a href="#">Change deadlines</a></li>
-        <li><a href="#">Delete circle & notify members</a></li>
+      <h4>Current Members</h4>
+      <ul>
+        <% @circle_members.each do |member| %>
+          <li><%= member.user_name %></li>
+        <% end %>
       </ul>
+
+      <% if @circle.has_admin(@current_user) %>
+        <ul class="inline-list">
+          <li><a href="#">Start mixup now</a></li>
+          <li><a href="#">Change deadlines</a></li>
+          <li><a href="#">Delete circle & notify members</a></li>
+        </ul>
+      <% end %>
     <% end %>
 
 </div>
