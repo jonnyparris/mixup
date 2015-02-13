@@ -9,6 +9,24 @@ class Circle < ActiveRecord::Base
   validates_uniqueness_of :name, scope: :creator_id
   validates :signup_deadline, date: { before: :submit_deadline }
 
+  def days_to_signup
+    ((self.signup_deadline - DateTime.now)/86400).floor
+  end
+
+  def days_to_submit
+    ((self.submit_deadline - DateTime.now)/86400).floor
+  end
+
+  def status
+    if self.days_to_signup < 0 && self.days_to_submit < 0
+      "finished"
+    elsif self.days_to_signup < 0
+      "in progress"
+    else
+      "not started"
+    end
+  end
+
   def members
     Submission.where(circle_id: self.id)
                  .map { |submission| submission.original.creator }
