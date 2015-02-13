@@ -7,7 +7,7 @@ class Circle < ActiveRecord::Base
   validates_presence_of :signup_deadline
   validates_presence_of :submit_deadline
   validates_uniqueness_of :name, scope: :creator_id
-  validates :signup_deadline, date: { before: :submit_deadline }
+  validates :signup_deadline, date: { before: :submit_deadline, message: "must be before submission deadline" }
 
   def days_to_signup
     ((self.signup_deadline - DateTime.now)/86400).floor
