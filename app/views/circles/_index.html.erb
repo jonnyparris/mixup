@@ -13,19 +13,11 @@
 
       <% @circles.each do |circle| %>
         <li>
-          <% if circle.has_admin(@current_user) %>
-            <div class="circle-thumb my-circle">
-          <% else %>
-            <div class="circle-thumb">
-          <% end %>
+          <div class="<%= circle.div_class(@current_user) %>">
 
             <h3><%= "##{circle.id}-#{circle.name}" %></h3>
             <p>
-              <% if circle.submissions.count == 1 %>
-                <%= "1 member" %>
-              <% else %>
-                <%= "#{circle.submissions.count} members" %>
-              <% end %>
+              <%= circle.members_count %>
             </p>
 
 

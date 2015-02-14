@@ -9,6 +9,14 @@ class Circle < ActiveRecord::Base
   validates_uniqueness_of :name, scope: :creator_id
   validates :signup_deadline, date: { before: :submit_deadline, message: "must be before submission deadline" }
 
+  def div_class(current_user)
+    self.has_admin(current_user) ? "circle-thumb my-circle" : "circle-thumb"
+  end
+
+  def members_count
+    self.members.count == 1 ? "1 member" : "#{self.members.count} members"
+  end
+
   def days_to_signup
     ((self.signup_deadline - DateTime.now)/86400).floor
   end
