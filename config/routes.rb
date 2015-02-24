@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
   resources :circles do
     resources :submissions, only: [:create, :destroy, :update]
+    patch 'mixup', as: :mixup
   end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

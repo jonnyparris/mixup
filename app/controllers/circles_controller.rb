@@ -43,6 +43,17 @@ class CirclesController < ApplicationController
     end
   end
 
+  def mixup
+    if @circle.mixup
+      flash[:success] = "Awesome! Let the remixing begin."
+      redirect_to circle_path(@circle)
+    else
+      flash[:error] = ["Sorry, something went wrong. Please try again",
+                      @circle.errors.full_messages.to_sentence]
+      redirect_to circle_path(@circle)
+    end
+  end
+
   def destroy
     if @circle.destroy
       flash[:success] = "Sweet! Circle was successfully deleted"

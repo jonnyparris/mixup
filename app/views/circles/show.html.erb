@@ -73,7 +73,7 @@
 
       <% if @circle.has_admin(@current_user) %>
         <ul class="inline-list">
-          <li><a href="#">Start mixup now</a></li>
+          <li><%= link_to("Start mixup now", circle_mixup_path(id: @circle.id, circle_id: @circle.id) , method: :patch) %></li>
           <li><%= link_to("Edit this circle", edit_circle_path(@circle)) %></li>
           <li><%= link_to("Delete this circle", circle_path(@circle) , method: :delete) %></li>
         </ul>
