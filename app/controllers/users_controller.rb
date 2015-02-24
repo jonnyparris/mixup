@@ -2,11 +2,13 @@ class UsersController < ApplicationController
   before_action :current_user, except: [:index, :new, :create]
   before_action :reject_unless_logged_in, except: [:new, :create]
 
+  CIRCLE_OFFSET_DEFAULT = 4
+
   def dashboard
     @total_circles = Circle.count
     @circle_offset = params[:circle_offset].to_i
-    @circles = Circle.includes(:creator).limit(5).offset(@circle_offset)
-    @remaining_circles = @total_circles - @circle_offset - 5
+    @circles = Circle.includes(:creator).limit(CIRCLE_OFFSET_DEFAULT).offset(@circle_offset)
+    @remaining_circles = @total_circles - @circle_offset - CIRCLE_OFFSET_DEFAULT
   end
 
   def index

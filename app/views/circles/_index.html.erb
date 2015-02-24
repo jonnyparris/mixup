@@ -69,12 +69,12 @@
       <% if @remaining_circles %>
         <li>
           <% if @circle_offset == 0 && @remaining_circles > 0 %>
-            <%= link_to("More Circles ...(#{@remaining_circles})", user_dashboard_path(params[:id], :circle_offset => @circle_offset+5)) %>
+            <%= link_to("More Circles ...(#{@remaining_circles})", user_dashboard_path(params[:id], :circle_offset => @circle_offset+UsersController::CIRCLE_OFFSET_DEFAULT)) %>
           <% elsif @remaining_circles > 0 %>
-            <%= link_to("Prev 5...", user_dashboard_path(params[:id], :circle_offset => @circle_offset-5)) %>
-            <%= link_to("More Circles ...(#{@remaining_circles})", user_dashboard_path(params[:id], :circle_offset => @circle_offset+5)) %>
-          <% else %>
-            <%= link_to("Prev 5...", user_dashboard_path(params[:id], :circle_offset => @circle_offset-5)) %>
+            <%= link_to("Prev #{UsersController::CIRCLE_OFFSET_DEFAULT}...", user_dashboard_path(params[:id], :circle_offset => @circle_offset-UsersController::CIRCLE_OFFSET_DEFAULT)) %>
+            <%= link_to("More Circles ...(#{@remaining_circles})", user_dashboard_path(params[:id], :circle_offset => @circle_offset+UsersController::CIRCLE_OFFSET_DEFAULT)) %>
+          <% elsif @circle_offset > 0 %>
+            <%= link_to("Prev #{UsersController::CIRCLE_OFFSET_DEFAULT}...", user_dashboard_path(params[:id], :circle_offset => @circle_offset-UsersController::CIRCLE_OFFSET_DEFAULT)) %>
           <% end %>
         </li>
       <% end %>
