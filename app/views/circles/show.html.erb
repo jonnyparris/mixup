@@ -2,27 +2,38 @@
   <h3><%= @circle.name %></h3>
 
     <% if @circle.status == "finished" %>
-      <h4>Remixes</h4>
-      <ol>
-        <% @circle.submissions.each do |submission| %>
-          <li>
-            <ul class="inline-list">
-              <% if submission.remix.nil? %>
-                <li class="no-remix">
-                  NO REMIX SUBMITTED!
-                </li>
-              <% else %>
+      <% if @circle.submissions.empty? != true %>
+        <h4>Remixes</h4>
+        <ol>
+          <% @circle.submissions.each do |submission| %>
+            <li>
+              <ul class="inline-list">
+                <% if submission.remix.nil? %>
+                  <li class="no-remix">
+                    NO REMIX SUBMITTED!
+                  </li>
+                <% else %>
+                  <li>
+                    <%= link_to("#{submission.remix.track_name} by #{submission.remix.creator.user_name}", "#{submission.remix.download_url}") %>
+                  </li>
+                <% end %>
                 <li>
-                  <%= link_to("#{submission.remix.track_name} by #{submission.remix.creator.user_name}", "#{submission.remix.download_url}") %>
+                  <%= link_to("#{submission.original.track_name} by #{submission.original.creator.user_name}", "#{submission.original.download_url}") %>
                 </li>
-              <% end %>
-              <li>
-                <%= link_to("#{submission.original.track_name} by #{submission.original.creator.user_name}", "#{submission.original.download_url}") %>
-              </li>
-            </ul>
-          </li>
+              </ul>
+            </li>
+          <% end %>
+        </ol>
+      <% else %>
+        <p>This circle looks finished and empty!</p>
+        <% if @circle.has_admin(@current_user) %>
+          <ul class="inline-list">
+            <li><%= link_to("Edit this circle", edit_circle_path(@circle)) %></li>
+            <li><%= link_to("Delete this circle", circle_path(@circle) , method: :delete) %></li>
+          </ul>
         <% end %>
-      </ol>
+      <% end %>
+
 
     <% else %>
       <% if @circle.status == "in progress" %>
@@ -63,8 +74,8 @@
       <% if @circle.has_admin(@current_user) %>
         <ul class="inline-list">
           <li><a href="#">Start mixup now</a></li>
-          <li><a href="#">Change deadlines</a></li>
-          <li><a href="#">Delete circle & notify members</a></li>
+          <li><%= link_to("Edit this circle", edit_circle_path(@circle)) %></li>
+          <li><%= link_to("Delete this circle", circle_path(@circle) , method: :delete) %></li>
         </ul>
       <% end %>
     <% end %>
