@@ -48,7 +48,7 @@ class CirclesController < ApplicationController
       flash[:success] = "Awesome! Let the remixing begin."
       redirect_to circle_path(@circle)
     else
-      flash[:error] = ["Sorry, something went wrong. Please try again",
+      flash[:error] = ["Sorry, you need at least 3 members to start a circle. Please try again",
                       @circle.errors.full_messages.to_sentence]
       redirect_to circle_path(@circle)
     end
