@@ -74,17 +74,17 @@ class CirclesController < ApplicationController
 
   private
 
-    def circle_params
-      params.require(:circle).permit(:name,
-                                     :signup_deadline,
-                                     :submit_deadline)
-    end
+  def circle_params
+    params.require(:circle).permit(:name,
+                                   :signup_deadline,
+                                   :submit_deadline)
+  end
 
-    def find_circle
-      @circle = Circle.find(params[:id])
-    end
+  def find_circle
+    @circle = Circle.find(params[:id])
+  end
 
-    def user_is_creator?
-      current_user.id == find_circle.creator_id
-    end
+  def user_is_creator?
+    current_user.id == find_circle.creator_id
+  end
 end
