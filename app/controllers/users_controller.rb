@@ -36,21 +36,22 @@ class UsersController < ApplicationController
     if @current_user.save
       login(@current_user.id)
       flash[:success] = "Success! Welcome to your dashboard!"
-      redirect_to user_dashboard_path(@current_user.id)
+      redirect_to user_dashboard_path(@current_user)
     else
       flash[:error] = ["Sorry, something went wrong. Please try again",
                       @current_user.errors.full_messages.to_sentence]
-      render 'new', layout: 'static_pages'
+      redirect_to new_user_path
     end
   end
 
   def update
     if @current_user.update_attributes(user_params)
       flash[:success] = "User was successfully updated"
-      redirect_to @current_user
+      redirect_to edit_user_path(@current_user)
     else
-      flash[:error] = "Something went wrong"
-      render @current_users_edit_path
+      flash[:error] = ["Sorry, something went wrong. Please try again",
+                      @current_user.errors.full_messages.to_sentence]
+      redirect_to edit_user_path(@current_user)
     end
   end
 
