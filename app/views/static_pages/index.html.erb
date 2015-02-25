@@ -15,18 +15,42 @@
     <% if @current_user && @current_user.id %>
       <%= link_to("Create Circle", new_circle_path, class: "button") %>
     <% else %>
-      <%= link_to("Create Circle", new_user_path, class: "button") %>
+      <a href="#" data-reveal-id="login-create-circle-modal" class="button">Create Circle</a>
     <% end %>
   </div>
   <div class="small-6 columns text-center">
     <% if @current_user && @current_user.id %>
       <%= link_to("Join Circle", user_dashboard_path(@current_user), class: "button") %>
     <% else %>
-      <%= link_to("Join Circle", new_user_path, class: "button") %>
+      <a href="#" data-reveal-id="login-join-circle-modal" class="button">Join Circle</a>
     <% end %>
   </div>
 </div>
 
 <div class="row panel">
   Cool Intro Video / Featured Circles
+</div>
+
+<div class="reveal-modal" id="login-create-circle-modal" data-reveal>
+  <h3>Login to create a circle</h3>
+  <%= form_tag login_path do %>
+    <p>
+      <%= label_tag :email %>
+      <%= email_field_tag :email, params[:email] %>
+    </p>
+    <p>
+      <%= label_tag :password %>
+      <%= password_field_tag :password %>
+    </p>
+    <%= hidden_field_tag :next_step, "create_circle" %>
+    <%= submit_tag "Login", class: "button" %>
+  <% end %>
+  <p>Not a member yet? <%= link_to("Signup", new_user_path) %></p>
+
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+
+<div class="reveal-modal" id="login-join-circle-modal" data-reveal>
+  <%= render "sessions/login_form" %>
+  <a class="close-reveal-modal">&#215;</a>
 </div>

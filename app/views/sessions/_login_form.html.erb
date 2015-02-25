@@ -1,0 +1,14 @@
+<h3>Login</h3>
+<%= form_tag login_path do %>
+  <p>
+    <%= label_tag :email %>
+    <%= email_field_tag :email, params[:email] %>
+  </p>
+  <p>
+    <%= label_tag :password %>
+    <%= password_field_tag :password %>
+  </p>
+
+  <%= submit_tag "Login", class: "button" %>
+<% end %>
+<p>Not a member yet? <%= link_to("Signup", new_user_path) %></p>
