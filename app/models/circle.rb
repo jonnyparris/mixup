@@ -77,4 +77,9 @@ class Circle < ActiveRecord::Base
     return false if self.allocation.nil?
     Track.find(self.allocation_hash["#{user_id}"])
   end
+
+  def stem_from(user)
+    return false unless self.has_member(user)
+    Submission.where(circle_id: self.id).detect { |submission| submission.original.creator == user}
+  end
 end

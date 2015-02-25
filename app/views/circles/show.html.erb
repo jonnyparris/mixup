@@ -70,8 +70,13 @@
 
       <h4>Current Members</h4>
       <ul>
+        <% if @circle.has_member(@current_user) %>
+          <li>You joined this circle with <%= @circle.stem_from(@current_user).original.track_name %> <%= link_to("- leave circle?", circle_submission_path(@circle, @circle.stem_from(@current_user)) , method: :delete) %></li>
+        <% end %>
         <% @circle_members.each do |member| %>
-          <li><%= member.user_name %></li>
+          <% if @current_user != member %>
+            <li><%= member.user_name %></li>
+          <% end %>
         <% end %>
       </ul>
 
