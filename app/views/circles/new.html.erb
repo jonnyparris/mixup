@@ -4,6 +4,6 @@
   <%= f.text_field_with_label :name, required: true %>
   <%= f.datetime_field_with_label :signup_deadline, required: true %>
   <%= f.datetime_field_with_label :submit_deadline, default: 3.days.from_now, required: true %>
-  <%= f.submit %>
+  <%= f.submit class: "button" %>
 
 <% end %>
