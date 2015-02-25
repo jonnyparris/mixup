@@ -12,10 +12,18 @@
 
 <div class="row panel">
   <div class="small-6 columns text-center">
-    <a href="#" class="button">Create Circle</a>
+    <% if @current_user && @current_user.id %>
+      <%= link_to("Create Circle", new_circle_path, class: "button") %>
+    <% else %>
+      <%= link_to("Create Circle", new_user_path, class: "button") %>
+    <% end %>
   </div>
   <div class="small-6 columns text-center">
-    <a href="#" class="button">Join Circle</a>
+    <% if @current_user && @current_user.id %>
+      <%= link_to("Join Circle", user_dashboard_path(@current_user), class: "button") %>
+    <% else %>
+      <%= link_to("Join Circle", new_user_path, class: "button") %>
+    <% end %>
   </div>
 </div>
 
