@@ -4,6 +4,11 @@ class TracksController < ApplicationController
   before_action :find_stem, except: [:index, :new, :create]
 
   def index
+    unless user_matches_url
+      flash[:error] = ["Sorry, something went wrong.",
+                      "You were barking up the wrong tree."]
+      redirect_to root_path
+    end
     @tracks = Track.where(creator_id: current_user.id)
   end
 

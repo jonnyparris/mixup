@@ -5,6 +5,11 @@ class UsersController < ApplicationController
   CIRCLE_OFFSET_DEFAULT = 4
 
   def dashboard
+    unless user_matches_url
+      flash[:error] = ["Sorry, something went wrong.",
+                      "You were barking up the wrong tree."]
+      redirect_to root_path
+    end
     @total_circles = Circle.count
     @circle_offset = params[:circle_offset].to_i
     @circles = Circle.includes(:creator).limit(CIRCLE_OFFSET_DEFAULT).offset(@circle_offset)

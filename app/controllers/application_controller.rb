@@ -9,6 +9,14 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.includes(:circles,:stems,:remixes).find(session[:user_id]) if session[:user_id]
   end
 
+  def user_matches_url
+    if params[:user_id]
+      return current_user.id == params[:user_id].to_i
+    else
+      return current_user.id == params[:id].to_i
+    end
+  end
+
   def logout
     session[:user_id] = nil
   end
