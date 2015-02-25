@@ -4,6 +4,11 @@ class TracksController < ApplicationController
   before_action :find_stem, except: [:index, :new, :create]
 
   def index
+    unless user_matches_url
+      flash[:error] = ["Sorry, something went wrong.",
+                      "You were barking up the wrong tree."]
+      redirect_to root_path
+    end
     @tracks = Track.where(creator_id: current_user.id)
   end
 
@@ -48,11 +53,11 @@ class TracksController < ApplicationController
   def destroy
     if @track.destroy
       flash[:success] = "Sweet! Track was successfully deleted"
-      redirect_to user_stems_path(params[:id])
+      redirect_to user_stems_path(@current_user)
     else
       flash[:error] = ["Sorry, something went wrong. Please try again",
                       @track.errors.full_messages.to_sentence]
-      redirect_to edit_user_tracks_path(params[:id])
+      redirect_to edit_user_tracks_path(@current_user)
     end
   end
 

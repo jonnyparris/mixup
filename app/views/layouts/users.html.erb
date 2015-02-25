@@ -45,11 +45,10 @@
             <li><%= link_to("Create Circle", new_circle_path) %></li>
             <li><%= link_to("View My Stems", user_stems_path(@current_user)) %></li>
             <li><%= link_to("Add Stems", new_user_stem_path(@current_user)) %></li>
-            <li><a href="#">Upload Remix</a></li>
           </ul>
         </aside>
 
-        <div class="current-container">
+        <div class="current-container columns">
           <% if flash[:success] %>
             <div data-alert class="alert-box success radius">
               <%= raw(flash[:success]) %>
@@ -70,7 +69,7 @@
 
       </main>
     </div>
-
+    <%= render "layouts/footer" %>
     <%= javascript_include_tag "application" %>
   </body>
 </html>

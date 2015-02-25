@@ -1,7 +1,32 @@
-<h1>Welcome landing page</h1>
-<ul>
-  <li><%= link_to "Signup", new_user_path %> </li>
-  <li><%= link_to("Login", login_path) %></li>
-  <li>login with soundcloud</li>
-  <li>intro video</li>
-</ul>
+<div class="row">
+  <div class="small-4 columns panel">
+    <h4>1. Submit your stems</h4>
+  </div>
+  <div class="small-4 columns panel">
+    <h4>2. Remix another track</h4>
+  </div>
+  <div class="small-4 columns panel">
+    <h4>3. Share the love</h4>
+  </div>
+</div>
+
+<div class="row panel">
+  <div class="small-6 columns text-center">
+    <% if @current_user && @current_user.id %>
+      <%= link_to("Create Circle", new_circle_path, class: "button") %>
+    <% else %>
+      <%= link_to("Create Circle", new_user_path, class: "button") %>
+    <% end %>
+  </div>
+  <div class="small-6 columns text-center">
+    <% if @current_user && @current_user.id %>
+      <%= link_to("Join Circle", user_dashboard_path(@current_user), class: "button") %>
+    <% else %>
+      <%= link_to("Join Circle", new_user_path, class: "button") %>
+    <% end %>
+  </div>
+</div>
+
+<div class="row panel">
+  Cool Intro Video / Featured Circles
+</div>
