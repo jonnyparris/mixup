@@ -53,11 +53,11 @@ class TracksController < ApplicationController
   def destroy
     if @track.destroy
       flash[:success] = "Sweet! Track was successfully deleted"
-      redirect_to user_stems_path(params[:id])
+      redirect_to user_stems_path(@current_user)
     else
       flash[:error] = ["Sorry, something went wrong. Please try again",
                       @track.errors.full_messages.to_sentence]
-      redirect_to edit_user_tracks_path(params[:id])
+      redirect_to edit_user_tracks_path(@current_user)
     end
   end
 
