@@ -6,70 +6,70 @@
 
     <title><%= content_for?(:title) ? yield(:title) : "Dashboard - Mixup" %></title>
 
-    <%= stylesheet_link_tag    "application" %>
+    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
     <%= javascript_include_tag "vendor/modernizr" %>
     <%= csrf_meta_tags %>
   </head>
 
   <body>
-    <div class="off-canvas-wrap" data-offcanvas>
-      <main class="inner-wrap">
+    <div class="fixed">
+      <nav class="top-bar" data-topbar role="navigation">
+        <ul class="title-area">
+          <li class="name">
+            <h1><%= link_to("Home", user_dashboard_path(@current_user)) %></h1>
+          </li>
+          <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
+        </ul>
 
-        <nav class="top-bar" data-topbar role="navigation">
-          <ul class="title-area">
-            <li class="name">
-              <h1><%= link_to("Mixup", root_path) %></h1>
+        <section class="top-bar-section">
+          <ul class="right">
+            <li class="has-dropdown">
+              <a href="#">Circles</a>
+              <ul class="dropdown">
+                <li><%= link_to("Create Circle", new_circle_path) %></li>
+              </ul>
+            </li>
+            <li class="has-dropdown">
+              <a href="#">Tracks</a>
+              <ul class="dropdown">
+                <li><%= link_to("View My Stems", user_stems_path(@current_user)) %></li>
+                <li><%= link_to("Add Stems", new_user_stem_path(@current_user)) %></li>
+              </ul>
+            </li>
+            <li class="has-dropdown">
+              <a href="#"><%= @current_user.user_name %></a>
+              <ul class="dropdown">
+                <li><label><%= @current_user.user_name %> User Menu</label></li>
+                <% if @current_user.avatar %>
+                  <li><img src=<%= "#{@current_user.avatar}" %> alt="your profile picture"></li>
+                <% end %>
+                <li><%= link_to("My Account", edit_user_path(@current_user)) %></li>
+                <li><%= link_to("Logout", logout_path) %></li>
+              </ul>
             </li>
           </ul>
-
-          <section class="top-bar-section">
-            <ul class="right">
-              <li><%= link_to("Logout", logout_path) %></li>
-            </ul>
-
-            <ul class="left">
-              <li><a href="#" class="left-off-canvas-toggle menu-icon">Menu</a></li>
-              <li><%= link_to("Dashboard", user_dashboard_path(@current_user)) %></li>
-            </ul>
-          </section>
-        </nav>
-
-        <aside id="user-menu" class="left-off-canvas-menu">
-          <% if @current_user.avatar %>
-            <img src=<%= "#{@current_user.avatar}" %> alt="your profile picture">
-          <% end %>
-
-          <ul class="off-canvas-list">
-            <li><label><%= @current_user.user_name %> User Menu</label></li>
-            <li><%= link_to("Account", edit_user_path(@current_user)) %></li>
-            <li><%= link_to("Create Circle", new_circle_path) %></li>
-            <li><%= link_to("View My Stems", user_stems_path(@current_user)) %></li>
-            <li><%= link_to("Add Stems", new_user_stem_path(@current_user)) %></li>
-          </ul>
-        </aside>
-
-        <div class="current-container columns">
-          <% if flash[:success] %>
-            <div data-alert class="alert-box success radius">
-              <%= raw(flash[:success]) %>
-              <a href="#" class="close">&times;</a>
-            </div>
-          <% end %>
-          <% if flash[:error] %>
-            <div data-alert class="alert-box alert radius">
-              <%= flash[:error][0] %>
-              <%= flash[:error][1]%>
-              <a href="#" class="close">&times;</a>
-            </div>
-          <% end %>
-          <%= yield %>
-        </div>
-
-        <a class="exit-off-canvas"></a>
-
-      </main>
+        </section>
+      </nav>
     </div>
+
+    <div class="current-container columns">
+      <% if flash[:success] %>
+        <div data-alert class="alert-box success radius">
+          <%= raw(flash[:success]) %>
+          <a href="#" class="close">&times;</a>
+        </div>
+      <% end %>
+      <% if flash[:error] %>
+        <div data-alert class="alert-box alert radius">
+          <%= flash[:error][0] %>
+          <%= flash[:error][1]%>
+          <a href="#" class="close">&times;</a>
+        </div>
+      <% end %>
+      <%= yield %>
+    </div>
+
     <%= render "layouts/footer" %>
-    <%= javascript_include_tag "application" %>
   </body>
 </html>
