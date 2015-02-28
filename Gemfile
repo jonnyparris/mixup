@@ -45,6 +45,7 @@ group :development, :test do
   gem 'rspec-collection_matchers'
   gem 'faker'
   gem 'factory_girl_rails'
+  gem 'show_me_the_cookies'
 end
 
 gem 'rack_session_access',      group: :test
