@@ -1,9 +1,9 @@
 <h3>Create New Circle</h3>
-<%= form_for @circle, builder: LabellingFormBuilder do |f| %>
+<%= simple_form_for @circle do |f| %>
 
-  <%= f.text_field_with_label :name, required: true %>
-  <%= f.datetime_field_with_label :signup_deadline, required: true %>
-  <%= f.datetime_field_with_label :submit_deadline, default: 3.days.from_now, required: true %>
-  <%= f.submit class: "button" %>
+  <%= f.input :name, required: true %>
+  <%= f.input :signup_deadline, as: :string, default: 3.days.from_now, required: true, input_html: { class: "fdatepicker", id: "signup_date"} %>
+  <%= f.input :submit_deadline, as: :string, default: 6.days.from_now, required: true, input_html: { class: "fdatepicker", id: "submit_date" } %>
+  <%= f.button :submit %>
 
 <% end %>

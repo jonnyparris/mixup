@@ -14,11 +14,15 @@
 //= require jquery_ujs
 //= require foundation
 //= require turbolinks
+//= require foundation-datepicker
 //= require_tree .
 
 var ready;
 ready = function() {
   $(document).foundation();
+  $('.fdatepicker').fdatepicker({
+      format: "dd/mm/yyyy"
+  });
 };
 $(document).ready(ready);
 $(document).on('page:load', ready);
