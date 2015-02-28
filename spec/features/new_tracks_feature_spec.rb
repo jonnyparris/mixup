@@ -1,7 +1,7 @@
 feature "Add new tracks" do
   before :each do
     @j_dilla = create(:user)
-    page.set_rack_session(user_id: @j_dilla.id)
+    login_as(@j_dilla)
   end
 
   scenario "should succeed for stems where user is specified" do

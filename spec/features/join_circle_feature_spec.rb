@@ -1,7 +1,7 @@
 feature "View, then join Circle" do
   before :each do
     @j_dilla = create(:user)
-    page.set_rack_session(user_id: @j_dilla.id)
+    login_as(@j_dilla)
     @new_beat = create(:track, creator: @j_dilla)
     @xmas = create(:future_circle, creator: @j_dilla)
   end

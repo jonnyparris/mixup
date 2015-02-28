@@ -1,7 +1,7 @@
 feature "Submit Remix" do
   before do
     @j_dilla = create(:user)
-    page.set_rack_session(user_id: @j_dilla.id)
+    login_as(@j_dilla)
     @new_beat = create(:track, creator: @j_dilla, track_name: "HippityHop")
     @present_circle = create(:present_circle)
     create_list(:stem_submit, 5, circle: @present_circle)

@@ -46,6 +46,7 @@ group :development, :test do
   gem 'faker'
   gem 'factory_girl_rails'
   gem 'show_me_the_cookies'
+  gem 'database_cleaner'
 end
 
 gem 'rack_session_access',      group: :test
