@@ -34,7 +34,7 @@ class UsersController < ApplicationController
   def create
     @current_user = User.new(user_params)
     if @current_user.save
-      login(@current_user.id)
+      login(@current_user)
       flash[:success] = "Success! Welcome to your dashboard!"
       redirect_to user_dashboard_path(@current_user)
     else
