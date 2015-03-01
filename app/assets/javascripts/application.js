@@ -20,9 +20,7 @@
 var ready;
 ready = function() {
   $(document).foundation();
-  $('.fdatepicker').fdatepicker({
-      format: "dd/mm/yyyy"
-  });
+  DependentDatePickersInit();
 };
 $(document).ready(ready);
 $(document).on('page:load', ready);
