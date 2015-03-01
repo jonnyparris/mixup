@@ -15,6 +15,13 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email, case_sensitive: false
 
   before_create { generate_token(:auth_token) }
+  before_save :set_avatar
+
+  DEFAULT_AVATAR = "http://www.avatarsdb.com/avatars/mr_pouty.jpg"
+
+  def set_avatar
+    self.avatar = DEFAULT_AVATAR if self.avatar.empty?
+  end
 
   def allocated_stem(circle_id)
     Circle.find(circle_id).allocated_stem(self.id)
