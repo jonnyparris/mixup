@@ -6,11 +6,11 @@
     <ul class="inline-list">
       <% @tracks.each do |track| %>
         <li>
-          <%= form_for @submission, url: circle_submission_path(circle_id: @submission.circle.id, id: @submission.id) do |f| %>
-            <%= f.hidden_field :remix_id, value: track.id %>
-            <%= f.hidden_field :circle_id, value: params[:id] %>
-            <%= f.hidden_field :original_id, value: params[:stem_id] %>
-            <%= f.submit "#{track.track_name}", :disable_with => 'Submitting...', class: "button round small" %>
+          <%= simple_form_for @submission, url: circle_submission_path(circle_id: @submission.circle.id, id: @submission.id) do |f| %>
+            <%= f.input :remix_id, as: :hidden, input_html: { value: track.id } %>
+            <%= f.input :circle_id, as: :hidden, input_html: { value: params[:id] } %>
+            <%= f.input :original_id, as: :hidden, input_html: { value: params[:stem_id] } %>
+            <%= f.button :submit, "#{track.track_name}", disable_with: 'Submitting...', class: "round small" %>
           <% end %>
         </li>
       <% end %>

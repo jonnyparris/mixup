@@ -1,10 +1,5 @@
-<%= form_for @circle, url: circle_path, builder: LabellingFormBuilder do |f| %>
-  <%= f.text_field_with_label :name, required: true %>
-  <%= f.datetime_field_with_label :signup_deadline, required: true %>
-  <%= f.datetime_field_with_label :submit_deadline, default: 3.days.from_now, required: true %>
-  <%= f.submit class: "button" %>
-<% end %>
+<%= render :partial => "form" %>
 <h3>Delete Circle?</h3>
-<%= form_for @circle, url: circle_path, :html => { :method => :delete } do |f| %>
-  <%= f.submit "Delete circle forever!", :disable_with => 'RIP awesome circle...', class: "button" %>
+<%= simple_form_for @circle, url: circle_path, :html => { :method => :delete } do |f| %>
+  <%= f.button :submit, "Delete circle forever!" %>
 <% end %>

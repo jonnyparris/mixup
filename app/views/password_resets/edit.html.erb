@@ -1,13 +1,7 @@
 <div class="row">
-  <%= form_for @user, :url => password_reset_path(params[:id]) do |f| %>
-     <div class="field">
-       <%= f.label :password %>
-       <%= f.password_field :password %>
-     </div>
-     <div class="field">
-       <%= f.label :password_confirmation %>
-       <%= f.password_field :password_confirmation %>
-     </div>
-     <%= f.submit "Update Password", class: "button" %>
+  <%= simple_form_for @user, :url => password_reset_path(params[:id]) do |f| %>
+    <%= f.input :password %>
+    <%= f.input :password_confirmation %>
+    <%= f.button :submit, "Update Password" %>
   <% end %>
 </div>

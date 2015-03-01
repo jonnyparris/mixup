@@ -1,0 +1,8 @@
+<%= simple_form_for @circle do |f| %>
+
+  <%= f.input :name, required: true %>
+  <%= f.input :signup_deadline, as: :string, default: 3.days.from_now, required: true, input_html: { class: "fdatepicker", id: "signup_date"} %>
+  <%= f.input :submit_deadline, as: :string, default: 6.days.from_now, required: true, input_html: { class: "fdatepicker", id: "submit_date" } %>
+  <%= f.button :submit %>
+
+<% end %>

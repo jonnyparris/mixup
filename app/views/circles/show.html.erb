@@ -55,10 +55,10 @@
           <ul class="inline-list">
             <% @stems.each do |stem| %>
               <li>
-                <%= form_for @submission, url: circle_submissions_path(circle_id: @circle.id) do |f| %>
-                  <%= f.hidden_field :circle_id, value: @circle.id %>
-                  <%= f.hidden_field :original_id, value: stem.id %>
-                  <%= f.submit "#{stem.track_name}", :disable_with => 'Submitting...', class: "button round small" %>
+                <%= simple_form_for @submission, url: circle_submissions_path(circle_id: @circle, id: @submission) do |f| %>
+                  <%= f.input :circle_id, input_html: { value: @circle.id }, as: :hidden %>
+                  <%= f.input :original_id, input_html: { value: stem.id }, as: :hidden %>
+                  <%= f.button :submit, "#{stem.track_name}", class: "round small" %>
                 <% end %>
               </li>
             <% end %>
