@@ -8,9 +8,13 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by_email(params[:email])
     if user && user.authenticate(params[:password])
-      login(user.id)
+      login(user, params[:remember_me])
       flash[:success] = "Welcome back!"
-      redirect_to user_dashboard_path(user.id)
+      if params[:next_step] == "create_circle"
+        redirect_to new_circle_path
+      else
+        redirect_to user_dashboard_path(user.id)
+      end
     else
       flash.now[:error] = ["Nah mate.","Your login failed."]
       render 'new'

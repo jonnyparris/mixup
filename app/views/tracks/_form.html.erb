@@ -1,0 +1,11 @@
+<% correct_url = @track.new_record? ? user_stems_path : user_stem_path %>
+<%= simple_form_for @track, url: correct_url do |f| %>
+  <%= f.hidden_field :creator_id, :value => params[:user_id] %>
+  <%= f.input :track_name, required: true %>
+  <%= f.input :download_url, required: true %>
+  <% if @track.new_record? %>
+    <%= f.button :submit, "Submit" %>
+  <% else %>
+    <%= f.button :submit %>
+  <% end %>
+<% end %>

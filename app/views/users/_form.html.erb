@@ -1,14 +1,13 @@
-<%= form_for @current_user, builder: LabellingFormBuilder do |f| %>
+<%= simple_form_for @current_user do |f| %>
 
-  <%= f.text_field_with_label :first_name %>
-  <%= f.text_field_with_label :last_name %>
-  <%= f.text_field_with_label :user_name, required: true %>
-  <%= f.text_field_with_label :location %>
-  <%= f.label :avatar, "Image URL for profile pic (uploading coming soon)" %>
-  <%= f.url_field :avatar %>
-  <%= f.email_field_with_label :email, required: true %>
-  <%= f.password_field_with_label :password, required: true %>
-  <%= f.password_field_with_label :password_confirmation, required: true %>
-  <%= f.submit class: "button" %>
+  <%= f.input :user_name, required: true %>
+  <%= f.input :email, required: true %>
+  <%= f.input :password, required: true %>
+  <%= f.input :password_confirmation, required: true %>
+  <%= f.input :first_name %>
+  <%= f.input :last_name %>
+  <%= f.input :location %>
+  <%= f.input :avatar, label: "Image URL for profile pic (uploading coming soon)" %>
+  <%= f.button :submit %>
 
 <% end %>

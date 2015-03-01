@@ -14,7 +14,22 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :user_name, case_sensitive: false
   validates_uniqueness_of :email, case_sensitive: false
 
+  before_create { generate_token(:auth_token) }
+
   def allocated_stem(circle_id)
     Circle.find(circle_id).allocated_stem(self.id)
+  end
+
+  def generate_token(column)
+    begin
+      self[column] = SecureRandom.urlsafe_base64
+    end while User.exists?(column => self[column])
+  end
+
+  def send_password_reset
+    generate_token(:password_reset_token)
+    UserMailer.password_reset(self).deliver
+    self.password_sent_at = Time.now
+    save!
   end
 end

@@ -13,8 +13,10 @@
  *= require_tree .
  *= require_self
  *= require foundation_and_overrides
+ *= require font-awesome
+ *= require foundation-datepicker
  */
 
-
- @import "foundation_and_overrides";
- /* Add imports of custom sass/scss files here */
+@import "foundation_and_overrides";
+@import "font-awesome";
+@import "foundation-datepicker"

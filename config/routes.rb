@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'password_resets/new'
+
   get 'login' => 'sessions#new', as: :login
   post 'login' => 'sessions#create'
   get 'logout' => 'sessions#destroy', as: :logout
@@ -12,6 +14,8 @@ Rails.application.routes.draw do
   resources :users do
     resources :tracks, as: :stems
   end
+
+  resources :password_resets
 
   get     'circles/:id/submit_remix/:stem_id' => 'submissions#edit_remix',    as: :edit_remix
   delete  'circles/:id/submit_remix/:stem_id' => 'submissions#destroy_remix', as: :delete_remix
