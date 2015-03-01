@@ -21,7 +21,7 @@ class SubmissionsController < ApplicationController
 
   def update
     find_submission
-    if @submission.update_attributes(submission_params) && @submission.remix_id != nil
+    if @submission.update_attributes(submission_params) && @submission.remix_id.nil? == false
       undo_link = view_context.link_to('UNDO', delete_remix_path(id: @submission.circle_id, stem_id: @submission.original.id), method: :delete).html_safe
       flash[:success] = "Success! Remix was successfully submitted - #{undo_link}"
       redirect_to circle_path(@submission.circle)
