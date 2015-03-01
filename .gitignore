@@ -15,4 +15,5 @@
 /log/*.log
 /tmp
 
-/config/secrets.yml
+# Not sure i want to exclude this file anymore
+# /config/secrets.yml
