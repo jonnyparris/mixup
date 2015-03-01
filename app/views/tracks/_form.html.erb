@@ -2,7 +2,7 @@
 <%= simple_form_for @track, url: correct_url do |f| %>
   <%= f.hidden_field :creator_id, :value => params[:user_id] %>
   <%= f.input :track_name, required: true %>
-  <%= f.input :download_url, required: true %>
+  <%= f.input :download_url, required: true, input_html: { placeholder: "paste url here" } %>
   <% if @track.new_record? %>
     <%= f.button :submit, "Submit" %>
   <% else %>
