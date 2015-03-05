@@ -22,23 +22,20 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc
-
 gem 'foundation-rails', '5.4.5'
-
 gem 'simple_form'
-
 gem 'font-awesome-rails'
-
 gem 'date_validator'
-
 gem 'rails_12factor',           group: :production
-
+gem 'rmagick'
+gem 'carrierwave', :git => 'https://github.com/carrierwaveuploader/carrierwave.git', :branch => 'master'
 group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-
+  gem 'better_errors'
   #visualize the schema automagically
   gem 'rails-erd'
+  gem 'quiet_assets'
 end
 
 group :development, :test do
