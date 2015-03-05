@@ -7,6 +7,9 @@ class ApplicationController < ActionController::Base
 
   def current_user
     @current_user ||= User.includes(:circles, :stems, :remixes).find_by_auth_token!(cookies[:auth_token]) if cookies[:auth_token]
+    rescue ActiveRecord::RecordNotFound
+      logout
+      flash[:error] = ["Seems like you had a weird cookie, but don't worry it's been deleted now"]
   end
 
   def user_matches_url
