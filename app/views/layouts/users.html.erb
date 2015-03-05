@@ -41,7 +41,7 @@
               <a href="#"><%= @current_user.user_name %></a>
               <ul class="dropdown">
                 <li><label><%= @current_user.user_name %> User Menu</label></li>
-                <li><img src=<%= "#{@current_user.avatar}" %> alt="your profile picture"></li>
+                <li><%= image_tag(@current_user.avatar.url(:thumb)) %></li>
                 <li><%= link_to("My Account", edit_user_path(@current_user)) %></li>
                 <li><%= link_to("Logout", logout_path) %></li>
               </ul>

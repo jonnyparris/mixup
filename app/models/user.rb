@@ -17,10 +17,11 @@ class User < ActiveRecord::Base
   before_create { generate_token(:auth_token) }
   before_save :set_avatar
 
+  mount_uploader :avatar, AvatarUploader
   DEFAULT_AVATAR = "http://www.avatarsdb.com/avatars/mr_pouty.jpg"
 
   def set_avatar
-    self.avatar = DEFAULT_AVATAR if self.avatar.empty?
+    self.avatar.url = DEFAULT_AVATAR if self.avatar.nil?
   end
 
   def allocated_stem(circle_id)

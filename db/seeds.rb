@@ -3,7 +3,7 @@
               last_name: Faker::Name.last_name,
               user_name: Faker::Internet.user_name,
               email: Faker::Internet.email,
-              avatar: Faker::Avatar.image,
+              remote_avatar_url: Faker::Avatar.image,
               location: Faker::Address.city,
               password: "poppop")
   3.times do
