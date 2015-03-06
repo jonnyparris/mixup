@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'logout' => 'sessions#destroy', as: :logout
 
   get 'static_pages/index', as: :welcome
+  get 'static_pages/kitchen'
 
   root 'static_pages#index'
 
