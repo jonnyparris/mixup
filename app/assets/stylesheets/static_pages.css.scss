@@ -7,6 +7,17 @@
   max-width: 1600px;
 }
 
+.tagline {
+  padding-left: 1rem;
+}
+
+.login-box {
+  margin-top: 0.75rem;
+  p {
+    margin-bottom: 0;
+  }
+}
+
 /* Styles for signup panels */
 .auth-plain {
   padding-right: 0px;
