@@ -6,8 +6,8 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by_email(params[:email])
-    if user && user.authenticate(params[:password])
+    user = User.find_by_email(params[:session][:email])
+    if user && user.authenticate(params[:session][:password])
       login(user, params[:remember_me])
       flash[:success] = "Welcome back!"
       if params[:next_step] == "create_circle"

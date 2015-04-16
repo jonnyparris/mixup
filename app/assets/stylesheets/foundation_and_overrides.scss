@@ -1441,3 +1441,32 @@ $include-html-global-classes: $include-html-classes;
 // $include-accessibility-classes: true;
 
 @import 'foundation';
+
+.dash-header {
+  background-color: $topbar-bg-color;
+}
+
+.footer {
+  background-color: $primary-color;
+  text-align: center;
+  color: #fff;
+
+  i {
+  font-size: 2rem;
+  }
+
+  p, a {
+  font-size: .8em;
+  color: #fff;
+  margin-top: 1.2rem;
+  }
+
+  ul {
+    list-style: none;
+    margin-left: 0;
+    margin-bottom: 0;
+  }
+  li {
+    display: inline-block;
+  }
+}

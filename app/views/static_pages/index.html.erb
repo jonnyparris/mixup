@@ -1,56 +1,44 @@
+<div class="row text-center">
+  <p class="tagline text-left">"Think secret santa, but for music makers all year round."</p>
+  <%= image_tag("santa_cropped.png", alt: "give the sweet gift of creativity", size: "600x400")  %>
+</div>
 <div class="row">
-  <div class="small-4 columns panel">
+  <div class="large-4 columns panel">
     <h4>1. Submit your stems</h4>
   </div>
-  <div class="small-4 columns panel">
+  <div class="large-4 columns panel">
     <h4>2. Remix another track</h4>
   </div>
-  <div class="small-4 columns panel">
+  <div class="large-4 columns panel">
     <h4>3. Share the love</h4>
   </div>
-</div>
-
-<div class="row panel">
-  <div class="small-6 columns text-center">
-    <% if @current_user && @current_user.id %>
-      <%= link_to("Create Circle", new_circle_path, class: "button") %>
-    <% else %>
-      <a href="#" data-reveal-id="login-create-circle-modal" class="button">Create Circle</a>
-    <% end %>
-  </div>
-  <div class="small-6 columns text-center">
-    <% if @current_user && @current_user.id %>
-      <%= link_to("Join Circle", user_dashboard_path(@current_user), class: "button") %>
-    <% else %>
-      <a href="#" data-reveal-id="login-join-circle-modal" class="button">Join Circle</a>
-    <% end %>
+  <div class="row">
+    <div class="small-centered small-3 columns">
+      <% if @current_user && @current_user.id %>
+          <%= link_to("Get Started", user_dashboard_path(@current_user), class: "button") %>
+      <% else %>
+        <a href="#getstarted" data-reveal-id="get-started-modal" class="button centered">Get Started</a>
+      <% end %>
+    </div>
   </div>
 </div>
 
-<div class="row panel">
-  Cool Intro Video / Featured Circles
-</div>
+<div id="get-started-modal" class="reveal-modal remove-whitespace" data-reveal>
+<div class="row">
+    <div class="large-6 columns auth-plain">
+      <div class="signup-panel left-solid">
+        <%= render :partial => "sessions/login_form" %>
+      </div>
+    </div>
 
-<div class="reveal-modal" id="login-create-circle-modal" data-reveal>
-  <h3>Login to create a circle</h3>
-  <%= form_tag login_path do %>
-    <p>
-      <%= label_tag :email %>
-      <%= email_field_tag :email, params[:email] %>
-    </p>
-    <p>
-      <%= label_tag :password %>
-      <%= password_field_tag :password %>
-    </p>
-    <%= hidden_field_tag :next_step, "create_circle" %>
-    <%= submit_tag "Login", class: "button" %>
-  <% end %>
-  <p>Not a member yet? <%= link_to("Signup", new_user_path) %></p>
+    <div class="large-6 columns auth-plain">
+      <div class="signup-panel newusers">
+        <p class="welcome"> New User?</p>
+        <p>Signup to create and join remix circles with your music.</p>
+        <%= link_to("Signup", new_user_path, class: "button newbie") %></br>
+      </div>
+    </div>
 
-  <a class="close-reveal-modal">&#215;</a>
-</div>
-
-<div class="reveal-modal" id="login-join-circle-modal" data-reveal>
-  <%= render "sessions/login_form" %>
+   </div>
   <a class="close-reveal-modal">&#215;</a>
 </div>
