@@ -1455,26 +1455,18 @@ $include-html-global-classes: $include-html-classes;
   font-size: 2rem;
   }
 
-  h4 {
-  color: #fff;
-  font-size: 1em;
-  font-weight: 400;
-  text-transform: uppercase;
-  margin-top: 2.5rem;
-  margin-bottom: 10px;
-  }
-
   p, a {
-  font-weight: 300;
   font-size: .8em;
   color: #fff;
+  margin-top: 1.2rem;
   }
 
   ul {
-  padding-left: 1.2em;
+    list-style: none;
+    margin-left: 0;
+    margin-bottom: 0;
   }
-
   li {
-    margin-top: .5em;
+    display: inline-block;
   }
 }
