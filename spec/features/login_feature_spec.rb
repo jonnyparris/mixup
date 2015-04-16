@@ -17,17 +17,17 @@ feature "Login" do
     fill_in "Password", with: "poppop"
     check "Remember me"
     click_button("Login")
-    expect(page).to have_link("Home")
+    expect(page).to have_link("Dashboard")
 
     expire_cookies
 
     visit user_dashboard_path(@dilla)
-    expect(page).to have_content("Home")
+    expect(page).to have_content("Dashboard")
   end
 
   scenario "should work with login_helper" do
     login_as(@dilla)
     visit user_dashboard_path(@dilla)
-    expect(page).to have_content("Home")
+    expect(page).to have_content("Dashboard")
   end
 end
