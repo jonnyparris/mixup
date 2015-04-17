@@ -3,6 +3,14 @@
   border-radius: 10px;
   box-sizing: border-box;
   padding: 1em;
+  max-height: 400px;
+  overflow: auto;
+}
+
+div.circle-thumb:hover {
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.25);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.25);
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.25);
 }
 
 .my-circle {
