@@ -10,14 +10,17 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
+ *= require circle
+ *= require dashboard
+ *= require static_pages
  *= require_self
  */
 
 @import "foundation_and_overrides";
 @import "font-awesome";
 @import "foundation-datepicker";
-
+@import "hover";
+@import "footer";
 .avatar-preview img {
   padding: 1em;
 }

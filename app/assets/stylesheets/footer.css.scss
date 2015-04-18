@@ -1,0 +1,28 @@
+.footer {
+  background-color: $primary-color;
+  text-align: center;
+  color: #fff;
+  // height: 50px;
+  // position: fixed;
+  // bottom: 0;
+
+  i {
+    font-size: 2rem;
+    @extend .hvr-bob;
+  }
+
+  p, a {
+    font-size: .8em;
+    color: #fff;
+    margin-top: 1.2rem;
+  }
+
+  ul {
+    list-style: none;
+    margin-left: 0;
+    margin-bottom: 0;
+  }
+  li {
+    display: inline-block;
+  }
+}
