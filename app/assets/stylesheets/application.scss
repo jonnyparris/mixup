@@ -26,8 +26,11 @@
 @import "static_pages";
 
 .current-container {
-  padding-top: 45px;
   padding-bottom: 50px;
+}
+
+.with-header {
+  padding-top: 45px;
 }
 
 .big-wrapper {
