@@ -22,3 +22,12 @@
 @import "dashboard";
 @import "circle";
 @import "static_pages";
+
+.current-container {
+  padding-bottom: 50px;
+}
+
+.big-wrapper {
+  min-height: 100%;
+  position: relative;
+}
