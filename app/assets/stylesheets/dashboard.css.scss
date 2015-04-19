@@ -1,3 +1,5 @@
+$circle-color: rgba($primary-color,0.5);
+
 .dash-header {
   background-color: $topbar-bg-color;
 }
@@ -7,7 +9,7 @@
 }
 
 .circle-thumb {
-  background-color: rgba(125,0,255,0.45);
+  background-color: $circle-color;
   border-radius: 7px;
   box-sizing: border-box;
   height: 200px;
