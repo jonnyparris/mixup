@@ -16,7 +16,7 @@
           <div class="circle-pic">
             <%= image_tag(circle.creator.avatar_url, alt: "#{circle.creator.user_name} avatar pic") %>
           </div>
-          <h3 class="text-center"><%= "##{circle.id}-#{circle.name}" %></h3>
+          <h3 class="circle-name text-center"><%= "##{circle.id}-#{circle.name}" %></h3>
 
           <div class="circle-texts">
             <%= link_to content_tag(:span, ""), "#{circle_path(circle)}" %>

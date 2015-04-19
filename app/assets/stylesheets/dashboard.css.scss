@@ -16,10 +16,10 @@ $circle-color: rgba($primary-color,0.5);
   overflow: hidden;
   position: relative;
 
-  h3 {
+  .circle-name {
+    width: 100%;
     position: absolute;
     bottom: 0px;
-    left: 25%;
   }
 
   .circle-pic img {
