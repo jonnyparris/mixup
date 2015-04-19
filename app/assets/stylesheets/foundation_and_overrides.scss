@@ -88,6 +88,7 @@ $include-html-global-classes: $include-html-classes;
 
 // We use these to define default font stacks
 // $font-family-sans-serif: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+$font-family-sans-serif: Lato, Roboto, Arial, sans-serif;
 // $font-family-serif: Georgia, Cambria, "Times New Roman", Times, serif;
 // $font-family-monospace: Consolas, "Liberation Mono", Courier, monospace;
 
@@ -97,20 +98,23 @@ $include-html-global-classes: $include-html-classes;
 
 // We use these as default colors throughout
 // $primary-color: #008CBA;
+$primary-color: #E22525;
 // $secondary-color: #e7e7e7;
+$secondary-color: #F5F5F5;
 // $alert-color: #f04124;
 // $success-color: #43AC6A;
+$success-color: #1EB51E;
 // $warning-color: #f08a24;
 // $info-color: #a0d3e8;
 
 // $white       : #FFFFFF;
-// $ghost       : #FAFAFA;
+$ghost       : #FAFAFA;
 // $snow        : #F9F9F9;
 // $vapor       : #F6F6F6;
-// $white-smoke : #F5F5F5;
+$white-smoke : #F5F5F5;
 // $silver      : #EFEFEF;
 // $smoke       : #EEEEEE;
-// $gainsboro   : #DDDDDD;
+$gainsboro   : #DDDDDD;
 // $iron        : #CCCCCC;
 // $base        : #AAAAAA;
 // $aluminum    : #999999;
@@ -120,12 +124,13 @@ $include-html-global-classes: $include-html-classes;
 // $charcoal    : #555555;
 // $tuatara     : #444444;
 // $oil         : #333333;
-// $jet         : #222222;
+$jet         : #222222;
 // $black       : #000000;
 
 // We use these to control various global styles
 // $body-bg: $white;
-// $body-font-color: $jet;
+$body-bg: $gainsboro;
+$body-font-color: $jet;
 // $body-font-family: $font-family-sans-serif;
 // $body-font-weight: $font-weight-normal;
 // $body-font-style: normal;
@@ -141,6 +146,7 @@ $include-html-global-classes: $include-html-classes;
 
 // We use these to make sure border radius matches unless we want it different.
 // $global-radius: 3px;
+$global-radius: 7px;
 // $global-rounded: 1000px;
 
 // We use these to control inset shadow shiny edges and depressions.
@@ -351,6 +357,7 @@ $include-html-global-classes: $include-html-classes;
 // We use these to control border styles.
 // $alert-border-style: solid;
 // $alert-border-width: 1px;
+$alert-border-width: 3px;
 // $alert-border-color: scale-color($primary-color, $lightness: $alert-function-factor);
 // $alert-bottom-margin: rem-calc(20);
 
@@ -1362,7 +1369,8 @@ $include-html-global-classes: $include-html-classes;
 
 // Background color for the top bar
 // $topbar-bg-color: $oil;
-// $topbar-bg: $topbar-bg-color;
+$topbar-bg-color: $secondary-color;
+$topbar-bg: $topbar-bg-color;
 
 // Height and margin
 // $topbar-height: 45px;
@@ -1374,8 +1382,11 @@ $include-html-global-classes: $include-html-classes;
 
 // Style the top bar dropdown elements
 // $topbar-dropdown-bg: $oil;
+$topbar-dropdown-bg: $topbar-bg-color;
 // $topbar-dropdown-link-color: $white;
+$topbar-dropdown-link-color: $body-font-color;
 // $topbar-dropdown-link-bg: $oil;
+$topbar-dropdown-link-bg: $topbar-bg-color;
 // $topbar-dropdown-link-weight: $font-weight-normal;
 // $topbar-dropdown-toggle-size: 5px;
 // $topbar-dropdown-toggle-color: $white;
@@ -1383,6 +1394,7 @@ $include-html-global-classes: $include-html-classes;
 
 // Set the link colors and styles for top-level nav
 // $topbar-link-color: $white;
+$topbar-link-color: $body-font-color;
 // $topbar-link-color-hover: $white;
 // $topbar-link-color-active: $white;
 // $topbar-link-color-active-hover: $white;
@@ -1392,6 +1404,7 @@ $include-html-global-classes: $include-html-classes;
 // $topbar-link-bg: $topbar-bg;
 // $topbar-link-bg-color-hover: $charcoal;
 // $topbar-link-bg-hover: #272727;
+$topbar-link-bg-hover: $primary-color;
 // $topbar-link-bg-active: $primary-color;
 // $topbar-link-bg-active-hover: scale-color($primary-color, $lightness: -14%);
 // $topbar-link-font-family: $body-font-family;
@@ -1408,6 +1421,7 @@ $include-html-global-classes: $include-html-classes;
 // $topbar-dropdown-label-font-weight: $font-weight-bold;
 // $topbar-dropdown-label-font-size: rem-calc(10);
 // $topbar-dropdown-label-bg: $oil;
+$topbar-dropdown-label-bg: $topbar-bg-color;
 
 // Top menu icon styles
 // $topbar-menu-link-transform: uppercase;
@@ -1441,32 +1455,3 @@ $include-html-global-classes: $include-html-classes;
 // $include-accessibility-classes: true;
 
 @import 'foundation';
-
-.dash-header {
-  background-color: $topbar-bg-color;
-}
-
-.footer {
-  background-color: $primary-color;
-  text-align: center;
-  color: #fff;
-
-  i {
-  font-size: 2rem;
-  }
-
-  p, a {
-  font-size: .8em;
-  color: #fff;
-  margin-top: 1.2rem;
-  }
-
-  ul {
-    list-style: none;
-    margin-left: 0;
-    margin-bottom: 0;
-  }
-  li {
-    display: inline-block;
-  }
-}

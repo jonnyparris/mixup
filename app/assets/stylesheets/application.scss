@@ -10,14 +10,30 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
  *= require_self
  */
 
+@import url(http://fonts.googleapis.com/css?family=Lato);
+@import url(http://fonts.googleapis.com/css?family=Roboto);
 @import "foundation_and_overrides";
 @import "font-awesome";
 @import "foundation-datepicker";
+@import "hover";
+@import "animate.min";
+@import "footer";
+@import "dashboard";
+@import "circle";
+@import "static_pages";
 
-.avatar-preview img {
-  padding: 1em;
+.current-container {
+  padding-bottom: 50px;
+}
+
+.with-header {
+  padding-top: 45px;
+}
+
+.big-wrapper {
+  min-height: 100%;
+  position: relative;
 }

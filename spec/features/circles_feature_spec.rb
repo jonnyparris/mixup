@@ -26,7 +26,8 @@ describe "Circles" do
     expect(page).to have_content("Sweet!")
   end
 
-  scenario "should have a manage link if created by current user" do
+  #redundant until further notice
+  xscenario "should have a manage link if created by current user" do
     create(:future_circle)
     visit user_dashboard_path(@j_dilla)
     expect(page).to_not have_content("Manage")
