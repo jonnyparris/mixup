@@ -17,7 +17,7 @@
       <% if @current_user && @current_user.id %>
           <%= link_to("Get Started", user_dashboard_path(@current_user), class: "button") %>
       <% else %>
-        <a href="#getstarted" data-reveal-id="get-started-modal" class="secondary button centered">Get Started</a>
+        <a href="#getstarted" data-reveal-id="get-started-modal" class="button centered">Get Started</a>
       <% end %>
     </div>
   </div>
