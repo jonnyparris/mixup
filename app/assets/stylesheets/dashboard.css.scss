@@ -70,5 +70,9 @@ div.circle-thumb:hover {
 }
 
 .my-circle {
-  background-color: rgba(255,0,50,0.5);
+  background-color: rgba($success-color, 0.5);
+}
+
+.button-group.radius li {
+  margin: 0;
 }
