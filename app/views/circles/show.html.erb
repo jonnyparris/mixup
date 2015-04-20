@@ -81,9 +81,13 @@
 
     <% if @circle.has_admin(@current_user) %>
       <ul class="inline-list">
-        <li><%= link_to("Start mixup now", circle_mixup_path(id: @circle.id, circle_id: @circle.id) , method: :patch) %></li>
+        <li>
+          <span class="has-tip tip-top radius" aria-haspopup="true" data-tooltip title="Allocate stems for remixing before signup deadline?">
+            <%= link_to("Start mixup now", circle_mixup_path(id: @circle.id, circle_id: @circle.id) , method: :patch, data: { confirm: "Are you sure you want to activate this remix circle now with the current members and stems? (you can't undo this)" }) %>
+          </span>
+        </li>
         <li><%= link_to("Edit this circle", edit_circle_path(@circle)) %></li>
-        <li><%= link_to("Delete this circle", circle_path(@circle) , method: :delete) %></li>
+        <li><%= link_to("Delete this circle", circle_path(@circle) , method: :delete, data: { confirm: "Are you sure you want to delete this circle? (you can't undo this)" }) %></li>
       </ul>
     <% end %>
   <% end %>

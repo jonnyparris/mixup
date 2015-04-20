@@ -2,5 +2,5 @@
 <%= render :partial => "form" %>
 <h3>Delete Track?</h3>
 <%= simple_form_for @track, url: user_stem_path, user_id: @current_user.id, id: @track.id, :html => { :method => :delete } do |f| %>
-  <%= f.button :submit, "Delete track forever!" %>
+  <%= f.button :submit, "Delete track forever!", data: { confirm: "Are you sure?" } %>
 <% end %>

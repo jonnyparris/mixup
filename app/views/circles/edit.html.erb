@@ -1,5 +1,5 @@
 <%= render :partial => "form" %>
 <h3>Delete Circle?</h3>
 <%= simple_form_for @circle, url: circle_path, :html => { :method => :delete } do |f| %>
-  <%= f.button :submit, "Delete circle forever!" %>
+  <%= f.button :submit, "Delete circle forever!", data: { confirm: "Are you sure?" } %>
 <% end %>
