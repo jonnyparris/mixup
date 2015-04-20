@@ -16,6 +16,8 @@ gem 'simple_form'
 gem 'font-awesome-rails'
 gem 'date_validator'
 gem 'rails_12factor',           group: :production
+gem 'figaro'
+gem 'fog'
 gem 'rmagick'
 gem 'carrierwave', :git => 'https://github.com/carrierwaveuploader/carrierwave.git', :branch => 'master'
 group :development do
