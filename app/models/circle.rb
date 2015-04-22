@@ -17,6 +17,56 @@ class Circle < ActiveRecord::Base
     self.members.count == 1 ? "1 member" : "#{self.members.count} members"
   end
 
+  def deadline_message(current_user)
+    if self.status == "finished"
+      "FINISHED"
+    elsif self.status == "in progress"
+      self.submission_message(current_user)
+    else
+      self.signup_message(current_user)
+    end
+  end
+
+  def submission_message(current_user)
+    if self.needs_remix_from(current_user)
+      if self.days_to_submit == 1
+        "1 more day before submission deadline"
+      elsif self.days_to_submit > 1
+        "#{self.days_to_submit} days to submit your remix"
+      else
+        "Less than 24hrs left to submit your remix!"
+      end
+    else
+      if self.days_to_submit == 1
+        "1 more day before remixes unveiled"
+      elsif self.days_to_submit > 1
+        "#{self.days_to_submit} days before remixes unveiled"
+      else
+        "Less than 24hrs left remixes unveiled!"
+      end
+    end
+  end
+
+  def signup_message(current_user)
+    if self.has_member(current_user)
+      if self.days_to_signup == 1
+        "1 more day before mixup begins"
+      elsif self.days_to_signup > 1
+        "#{self.days_to_signup} days before mixup"
+      else
+        "Less than 24hrs before mixup begins!"
+      end
+    else
+      if self.days_to_signup == 1
+        "1 more day to join circle"
+      elsif self.days_to_signup > 1
+        "#{self.days_to_signup} days to join circle"
+      else
+        "Less than 24hrs left to join circle!"
+      end
+    end
+  end
+
   def days_to_signup
     ((self.signup_deadline - DateTime.now)/86400).floor
   end
@@ -48,21 +98,6 @@ class Circle < ActiveRecord::Base
     self.creator == user
   end
 
-  def mixup
-    return false if self.members.count < 3
-    stems = self.submissions.map { |submission| submission.original.id }
-    remixers = self.members.map { |member| member.id }
-    first_random_rotation_integer = (1..stems.length-1).to_a.sample
-    second_random_rotation_integer = (1..stems.length-1).to_a.sample
-
-    stems.rotate!(first_random_rotation_integer)
-    remixers.rotate!(first_random_rotation_integer)
-    remixers.rotate!(second_random_rotation_integer)
-    @allocations = Hash[remixers.zip(stems)]
-    self.allocation = @allocations.to_json
-    self.save!
-  end
-
   def allocation_hash
     JSON.parse(self.allocation)
   end
@@ -81,5 +116,20 @@ class Circle < ActiveRecord::Base
   def stem_from(user)
     return false unless self.has_member(user)
     Submission.where(circle_id: self.id).detect { |submission| submission.original.creator == user}
+  end
+
+  def mixup
+    return false if self.members.count < 3
+    stems = self.submissions.map { |submission| submission.original.id }
+    remixers = self.members.map { |member| member.id }
+    first_random_rotation_integer = (1..stems.length-1).to_a.sample
+    second_random_rotation_integer = (1..stems.length-1).to_a.sample
+
+    stems.rotate!(first_random_rotation_integer)
+    remixers.rotate!(first_random_rotation_integer)
+    remixers.rotate!(second_random_rotation_integer)
+    @allocations = Hash[remixers.zip(stems)]
+    self.allocation = @allocations.to_json
+    self.save!
   end
 end
