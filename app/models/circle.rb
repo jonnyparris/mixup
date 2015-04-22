@@ -17,6 +17,18 @@ class Circle < ActiveRecord::Base
     self.members.count == 1 ? "1 member" : "#{self.members.count} members"
   end
 
+  def created_by_message(current_user)
+    if self.has_admin(current_user)
+      if self.creator == current_user
+        "created by: YOU"
+      else
+        "created by: #{self.creator.user_name}, but you're an admin too!"
+      end
+    else
+      "created by: #{self.creator.user_name}"
+    end
+  end
+
   def deadline_message(current_user)
     if self.status == "finished"
       "FINISHED"
