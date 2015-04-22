@@ -46,7 +46,7 @@ class Circle < ActiveRecord::Base
       elsif self.days_to_submit > 1
         "#{self.days_to_submit} days to submit your remix"
       else
-        "Less than 24hrs left to submit your remix!"
+        "#{countdown_24hrs(self.submit_deadline)} to submit your remix!"
       end
     else
       if self.days_to_submit == 1
@@ -54,7 +54,7 @@ class Circle < ActiveRecord::Base
       elsif self.days_to_submit > 1
         "#{self.days_to_submit} days before remixes unveiled"
       else
-        "Less than 24hrs left remixes unveiled!"
+        "#{countdown_24hrs(self.submit_deadline)} left before remixes unveiled!"
       end
     end
   end
@@ -66,7 +66,7 @@ class Circle < ActiveRecord::Base
       elsif self.days_to_signup > 1
         "#{self.days_to_signup} days before mixup"
       else
-        "Less than 24hrs before mixup begins!"
+        "#{countdown_24hrs(self.signup_deadline)} before mixup begins!"
       end
     else
       if self.days_to_signup == 1
@@ -74,7 +74,7 @@ class Circle < ActiveRecord::Base
       elsif self.days_to_signup > 1
         "#{self.days_to_signup} days to join circle"
       else
-        "Less than 24hrs left to join circle!"
+        "#{countdown_24hrs(self.signup_deadline)} left to join circle!"
       end
     end
   end
@@ -85,6 +85,20 @@ class Circle < ActiveRecord::Base
 
   def days_to_submit
     ((self.submit_deadline - DateTime.now)/86400).floor
+  end
+
+  def countdown_24hrs(deadline)
+    now = Time.now
+    secs_left = (deadline - now).to_i
+    hours_left = secs_left/3600.floor
+    mins_left = secs_left/60.floor
+    if hours_left > 0
+      "#{hours_left}hrs"
+    elsif mins_left > 0
+      "#{mins_left} minutes"
+    else
+      "#{secs_left} seconds"
+    end
   end
 
   def status
