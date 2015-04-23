@@ -36,6 +36,12 @@
         <p class="welcome"> New User?</p>
         <p>Signup to create and join remix circles with your music.</p>
         <%= link_to("Signup", new_user_path, class: "button newbie radius") %></br>
+        <p>or</p>
+        <div class="text-center">
+          <%= link_to(new_sc_users_path) do %>
+            <%= image_tag("http://connect.soundcloud.com/2/btn-connect-sc-l.png") %>
+          <% end %>
+        </div>
       </div>
     </div>
 

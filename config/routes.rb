@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   post 'login' => 'sessions#create'
   get 'logout' => 'sessions#destroy', as: :logout
 
+  get 'login/sc' => 'sessions#new_sc', as: :sc_login
+  get 'login/sc/connected' => 'users#dashboard'
+
   get 'static_pages/index', as: :welcome
   get 'static_pages/kitchen'
 
@@ -14,6 +17,10 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :tracks, as: :stems
+    collection do
+      get 'new_sc'
+      get 'create_from_sc'
+    end
   end
 
   resources :password_resets

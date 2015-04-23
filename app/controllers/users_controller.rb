@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :current_user, except: [:index, :new, :create]
-  before_action :reject_unless_logged_in, except: [:new, :create]
+  before_action :current_user, except: [:index, :new, :create, :new_sc, :create_from_sc]
+  before_action :reject_unless_logged_in, except: [:new, :create, :new_sc, :create_from_sc]
 
   CIRCLE_OFFSET_DEFAULT = 4
 
@@ -23,12 +23,47 @@ class UsersController < ApplicationController
   def show
   end
 
+  def new_sc
+    user = User.new.soundcloud_client
+    redirect_to user.authorize_url
+  end
+
   def new
     @current_user = User.new
     render layout: 'static_pages'
   end
 
   def edit
+  end
+
+  def create_from_sc
+    sc = User.new.soundcloud_client
+    sc_access_token = sc.exchange_token(code: params[:code])
+    me = sc.get('/me')
+    @current_user = User.find_by_sc_user_id(me.id)
+    already_existed = @current_user.nil? ? false: true
+    if already_existed
+      @current_user.sc_token = sc_access_token
+    else
+      @current_user = User.new(user_name: me.username,
+                               location: me.email,
+                               remote_avatar_url: me.avatar_url,
+                               sc_user_id: me.id,
+                               sc_token: sc_access_token)
+    end
+    if @current_user.save
+      login(@current_user)
+      if already_existed
+        flash[:success] = "Welcome back!"
+      else
+        flash[:success] = "Welcome to Mixup! Hooray for easy SoundCloud signups"
+      end
+      redirect_to user_dashboard_path(@current_user)
+    else
+      flash[:error] = ["Sorry, something went wrong. Please try again",
+                      @current_user.errors.full_messages.to_sentence]
+      redirect_to new_user_path
+    end
   end
 
   def create
