@@ -5,21 +5,31 @@
       <h4>Remixes</h4>
       <ol>
         <% @circle.submissions.each do |submission| %>
-          <li>
-            <ul class="inline-list">
-              <% if submission.remix.nil? %>
-                <li class="no-remix">
-                  NO REMIX SUBMITTED!
-                </li>
-              <% else %>
-                <li>
-                  <%= link_to("#{submission.remix.track_name} by #{submission.remix.creator.user_name}", "#{submission.remix.download_url}") %>
-                </li>
-              <% end %>
-              <li>
-                <%= link_to("#{submission.original.track_name} by #{submission.original.creator.user_name}", "#{submission.original.download_url}") %>
-              </li>
-            </ul>
+          <li class="panel radius">
+            <div class="row">
+              <div class="small-5 columns text-right">
+                <p>
+                  <%= "#{submission.original.track_name}" %>
+                </p>
+                <p><%= "by #{submission.original.creator.user_name}" %></p>
+              </div>
+              <div class="small-2 column text-center">
+                <i class="fi-arrow-right"></i>
+                <p>remixed by</p>
+                <p><%= submission.remix.creator.user_name unless submission.remix.nil? %></p>
+              </div>
+              <div class="small-5 columns">
+                <% if submission.remix.nil? %>
+                  <p class="no-remix">
+                    NO REMIX SUBMITTED!
+                  </p>
+                <% else %>
+                  <p>
+                    <%= link_to("#{submission.remix.track_name} by #{submission.remix.creator.user_name}", "#{submission.remix.download_url}") %>
+                  </p>
+                <% end %>
+              </div>
+            </div>
           </li>
         <% end %>
       </ol>
