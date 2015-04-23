@@ -15,8 +15,8 @@ class CirclesController < ApplicationController
   def create
     @circle = @current_user.circles.new(circle_params)
     if @circle.save
-      flash[:success] = "Sweet! Circle successfully created"
-      redirect_to circles_path
+      flash[:success] = "Sweet! Circle successfully created - which track will you join it with?"
+      redirect_to circle_path(@circle)
     else
       flash[:error] = ["Sorry, something went wrong. Please try again",
                       @circle.errors.full_messages.to_sentence]
