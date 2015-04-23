@@ -139,6 +139,11 @@ class Circle < ActiveRecord::Base
     Track.find(self.allocation_hash["#{user_id}"])
   end
 
+  def pending_remix_from(stem)
+    user_id = self.allocation_hash.key(stem.id).first
+    User.find(user_id)
+  end
+
   def stem_from(user)
     return false unless self.has_member(user)
     Submission.where(circle_id: self.id).detect { |submission| submission.original.creator == user}

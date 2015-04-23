@@ -21,7 +21,11 @@
               <div class="small-5 columns">
                 <% if submission.remix.nil? %>
                   <p class="no-remix">
-                    NO REMIX SUBMITTED!
+                    <% if @circle.allocation.nil? %>
+                      This circle was never activated.
+                    <% else %>
+                      <%= "BOOO! #{@circle.pending_remix_from(submission.original).user_name} didn't submit a remix" %>
+                    <% end %>
                   </p>
                 <% else %>
                   <p>
