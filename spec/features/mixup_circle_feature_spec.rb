@@ -6,7 +6,7 @@ feature "Mixup Circle" do
     @new_beat = create(:track, creator: @j_dilla, track_name: "HippityHop")
   end
 
-  scenario "should only be an option for circles created by current user" do
+  xscenario "should only be an option for circles created by current user" do
     first_circle = create(:future_circle)
     visit circle_path(first_circle)
     expect(page).to_not have_content("Start mixup")
