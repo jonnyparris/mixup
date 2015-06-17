@@ -38,10 +38,10 @@ class UsersController < ApplicationController
 
   def create_from_sc
     sc = User.new.soundcloud_client
-    sc_access_token = sc.exchange_token(code: params[:code])
+    sc_access_token = sc.exchange_token(sc_params)[:access_token]
     me = sc.get('/me')
     @current_user = User.find_by_sc_user_id(me.id)
-    already_existed = @current_user.nil? ? false: true
+    already_existed = !@current_user.nil?
     if already_existed
       @current_user.sc_token = sc_access_token
     else
@@ -115,5 +115,9 @@ class UsersController < ApplicationController
 
     def reject_unless_logged_in
       redirect_to root_url, notice: "You must be logged in to view that page." unless current_user
+    end
+
+    def sc_params
+      params.symbolize_keys
     end
 end
