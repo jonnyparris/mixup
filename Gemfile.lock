@@ -45,6 +45,8 @@ GEM
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
       rack (>= 0.9.0)
+    binding_of_caller (0.7.2)
+      debug_inspector (>= 0.0.1)
     builder (3.2.2)
     capybara (2.4.4)
       mime-types (>= 1.16)
@@ -66,6 +68,7 @@ GEM
     database_cleaner (1.4.1)
     date_validator (0.7.1)
       activemodel
+    debug_inspector (0.0.2)
     diff-lcs (1.2.5)
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
@@ -354,6 +357,7 @@ PLATFORMS
 DEPENDENCIES
   bcrypt (~> 3.1.7)
   better_errors
+  binding_of_caller
   capybara
   carrierwave!
   coffee-rails (~> 4.0.0)
