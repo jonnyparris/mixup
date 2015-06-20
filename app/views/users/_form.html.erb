@@ -2,8 +2,15 @@
 
   <%= f.input :user_name, required: true %>
   <%= f.input :email, required: true %>
+  <ul class="right inline-list toggle-checkbox">
+    <li>
+      <label for="toggle-password">visible?</label>
+    </li>
+    <li>
+      <input type="checkbox" id="password-toggle" name="toggle-password" value="0">
+    </li>
+  </ul>
   <%= f.input :password, required: true %>
-  <%= f.input :password_confirmation, required: true %>
   <%= f.input :first_name %>
   <%= f.input :last_name %>
   <%= f.input :location %>

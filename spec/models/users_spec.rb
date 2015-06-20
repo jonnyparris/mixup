@@ -9,7 +9,6 @@ RSpec.describe User, :type => :model do
     it { should respond_to(:avatar) }
     it { should respond_to(:location) }
     it { should respond_to(:password_digest) }
-    it { should respond_to(:password_confirmation) }
     it { should respond_to(:password_reset_token) }
     it { should respond_to(:password_sent_at) }
   end

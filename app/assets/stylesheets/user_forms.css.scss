@@ -1,0 +1,17 @@
+.new_user {
+  max-width: 400px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.toggle-checkbox {
+  margin-bottom: 0;
+
+  > li {
+    margin-left: 0.5rem;
+  }
+
+  > li > input {
+    margin-bottom: 0;
+  }
+}
