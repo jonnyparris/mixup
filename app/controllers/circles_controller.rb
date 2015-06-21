@@ -20,6 +20,7 @@ class CirclesController < ApplicationController
     else
       flash[:error] = ["Sorry, something went wrong. Please try again",
                       @circle.errors.full_messages.to_sentence]
+      @circle
       render 'new'
     end
   end
