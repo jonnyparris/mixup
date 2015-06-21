@@ -29,7 +29,7 @@ class UsersController < ApplicationController
   end
 
   def new
-    @current_user = User.new
+    @current_user = User.new unless @current_user
     render layout: 'static_pages'
   end
 
@@ -75,7 +75,8 @@ class UsersController < ApplicationController
     else
       flash[:error] = ["Sorry, something went wrong. Please try again",
                       @current_user.errors.full_messages.to_sentence]
-      redirect_to new_user_path
+      @current_user
+      render new_user_path, layout: 'static_pages'
     end
   end
 
