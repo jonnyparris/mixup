@@ -1,6 +1,8 @@
-<h3>Edit Track Details</h3>
-<%= render :partial => "form" %>
-<h3>Delete Track?</h3>
-<%= simple_form_for @track, url: user_stem_path, user_id: @current_user.id, id: @track.id, :html => { :method => :delete } do |f| %>
-  <%= f.button :submit, "Delete track forever!", data: { confirm: "Are you sure?" } %>
-<% end %>
+<div class="row panel small-centred medium-5 large-4">
+  <h3>Edit Track Details</h3>
+  <%= render :partial => "form" %>
+  <h3>Delete Track?</h3>
+  <%= simple_form_for @track, url: user_stem_path, user_id: @current_user.id, id: @track.id, :html => { :method => :delete } do |f| %>
+    <%= f.button :submit, "Delete track forever!", data: { confirm: "Are you sure?" } %>
+  <% end %>
+</div>
