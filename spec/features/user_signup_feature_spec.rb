@@ -11,8 +11,16 @@ feature "User Signup" do
     fill_in "User name", with: "j_dilla"
     fill_in "Email", with: "j_dilla"
     fill_in "user_password", with: "j_dilla"
-    fill_in "user_password_confirmation", with: "j_dilla"
     click_button("Create User")
     expect(page).to have_content("Welcome")
+  end
+
+  scenario "should not wipe all fields when there are any errors" do
+    User.delete_all
+    visit new_user_path
+    fill_in "User name", with: "j_dilla"
+    click_button("Create User")
+    expect(page).to have_selector("input[value=j_dilla]")
+    expect(page).to have_content("Sorry")
   end
 end

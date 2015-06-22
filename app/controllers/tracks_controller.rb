@@ -35,6 +35,7 @@ class TracksController < ApplicationController
     else
       flash[:error] = ["Sorry, something went wrong. Please try again",
                       @track.errors.full_messages.to_sentence]
+      @track
       render 'new'
     end
   end

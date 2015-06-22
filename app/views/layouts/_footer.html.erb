@@ -7,10 +7,26 @@
       <p class="text-center">© 2014 Ruskin Constant, all rights reserved</p>
     </div>
     <ul class="small-3 columns text-right">
-      <li><%=  link_to('<i class="fi-info"></i>'.html_safe, "#") %></li>
-      <li><%=  mail_to("ruskin.constant+mixupcontact@gmail.com", '<i class="fi-mail"></i>'.html_safe) %></li>
-      <li><%=  link_to('<i class="fi-music"></i>'.html_safe, "https://soundcloud.com/shayken") %></li>
-      <li><%=  link_to('<i class="fi-social-github"></i>'.html_safe, "https://github.com/jonnyparris/mixup") %></li>
+      <li>
+        <span class="has-tip tip-left radius" aria-haspopup="true" data-tooltip title="help">
+          <%=  link_to('<i class="fi-info"></i>'.html_safe, "#") %>
+        </span>
+      </li>
+      <li>
+        <span class="has-tip tip-left radius" aria-haspopup="true" data-tooltip="" title="contact">
+          <%=  mail_to("ruskin.constant+mixupcontact@gmail.com", '<i class="fi-mail"></i>'.html_safe) %>
+        </span>
+      </li>
+      <li>
+        <span class="has-tip tip-left radius" aria-haspopup="true" data-tooltip="" title="soundcloud">
+          <%=  link_to('<i class="fi-music"></i>'.html_safe, "https://soundcloud.com/shayken") %>
+        </span>
+      </li>
+      <li>
+        <span class="has-tip tip-left radius" aria-haspopup="true" data-tooltip="" title="source code">
+          <%=  link_to('<i class="fi-social-github"></i>'.html_safe, "https://github.com/jonnyparris/mixup") %>
+        </span>
+      </li>
     </ul>
   </div>
 </footer>

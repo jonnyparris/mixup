@@ -16,8 +16,11 @@ gem 'simple_form'
 gem 'font-awesome-rails'
 gem 'date_validator'
 gem 'rails_12factor',           group: :production
+gem 'figaro'
+gem 'fog'
 gem 'rmagick'
 gem 'carrierwave', :git => 'https://github.com/carrierwaveuploader/carrierwave.git', :branch => 'master'
+gem 'soundcloud'
 group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
@@ -27,6 +30,7 @@ group :development do
   gem 'guard'
   gem 'guard-livereload', '~> 2.4', require: false
   gem 'rack-livereload'
+  gem 'binding_of_caller'
 end
 
 group :development, :test do
