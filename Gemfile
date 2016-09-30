@@ -37,7 +37,7 @@ end
 group :development, :test do
   gem 'capybara'
   gem 'rspec-rails', '~> 3.0.0'
-  gem 'shoulda-matchers'
+  gem 'shoulda', '~> 3.5'
   gem 'rspec-collection_matchers'
   gem 'faker'
   gem 'factory_girl_rails'
